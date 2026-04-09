@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tanipedia — 谷澤語録 非公式百科</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho+B1:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f5f0;
+      --surface: #ffffff;
+      --surface2: #f3ede4;
+      --border: #c9b99a;
+      --border-light: #e0d4c0;
+      --text: #1a1410;
+      --text-muted: #6b5a44;
+      --text-faint: #9e8b74;
+      --accent: #8b2020;
+      --accent2: #c4741a;
+      --accent-light: #fdf3e7;
+      --link: #1a4a8c;
+      --link-visited: #6b2a8c;
+      --gold: #b8860b;
+      --shadow: 0 1px 3px rgba(0,0,0,0.12);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Serif JP', serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    /* ===== HEADER ===== */
+    #site-header {
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .site-logo {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .site-logo span { color: var(--text-muted); font-size: 0.85rem; font-weight: 400; }
+    .header-search {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      gap: 6px;
+    }
+    .header-search input {
+      flex: 1;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      background: var(--bg);
+    }
+    .header-search button {
+      padding: 6px 14px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .header-nav {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .btn {
+      padding: 5px 12px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Noto Sans JP', sans-serif;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .btn:hover { background: var(--border-light); }
+    .btn-primary { background: var(--accent); color: white; border-color: var(--accent); }
+    .btn-primary:hover { background: #6e1a1a; }
+    .btn-sm { padding: 3px 10px; font-size: 12px; }
+
+    /* ===== LAYOUT ===== */
+    #main-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 20px;
+    }
+
+    /* ===== SIDEBAR ===== */
+    #sidebar {
+      position: sticky;
+      top: 70px;
+      height: fit-content;
+    }
+    .sidebar-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .sidebar-box h3 {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sidebar-box ul {
+      list-style: none;
+      padding: 6px 0;
+    }
+    .sidebar-box li a {
+      display: block;
+      padding: 4px 12px;
+      color: var(--link);
+      text-decoration: none;
+      font-size: 13px;
+      font-family: 'Noto Sans JP', sans-serif;
+      transition: background 0.1s;
+    }
+    .sidebar-box li a:hover { background: var(--accent-light); }
+    .sidebar-box li a.active { background: var(--accent-light); color: var(--accent); font-weight: 500; }
+
+    /* ===== MAIN CONTENT ===== */
+    #content-area {
+      min-height: 600px;
+    }
+
+    /* ===== PAGE VIEWS ===== */
+    .page-view { display: none; }
+    .page-view.active { display: block; }
+
+    /* ===== ARTICLE ===== */
+    .article-header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .article-title {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .article-meta {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .article-meta span {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+    .article-meta .badge {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 1px 8px;
+      border-radius: 2px;
+      color: var(--text-muted);
+    }
+    .article-actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .article-body {
+      font-size: 15px;
+      line-height: 1.85;
+    }
+    .article-body p { margin-bottom: 1em; }
+    .article-body h2 {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 4px;
+      margin: 1.5em 0 0.75em;
+      color: var(--text);
+    }
+    .article-body h3 {
+      font-size: 1.05rem;
+      margin: 1em 0 0.5em;
+      color: var(--text);
+    }
+    .article-body table {
+      border-collapse: collapse;
+      margin: 1em 0;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      width: auto;
+      max-width: 100%;
+    }
+    .article-body th, .article-body td {
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+    }
+    .article-body th { background: var(--surface2); font-weight: 600; }
+    .article-body blockquote {
+      border-left: 3px solid var(--accent2);
+      padding: 8px 16px;
+      margin: 1em 0;
+      background: var(--accent-light);
+      font-style: italic;
+      color: var(--text-muted);
+      border-radius: 0 3px 3px 0;
+    }
+
+    /* カスタム構文レンダリング */
+    .wiki-bold { font-weight: 700; }
+    .wiki-emphasis {
+      /* 圏点: テキスト強調 */
+      text-emphasis: filled circle;
+      -webkit-text-emphasis: filled circle;
+      text-emphasis-position: over right;
+      -webkit-text-emphasis-position: over right;
+    }
+    .wiki-link {
+      color: var(--link);
+      text-decoration: none;
+      cursor: pointer;
+      border-bottom: 1px solid #8ab;
+    }
+    .wiki-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    .wiki-redlink { color: var(--accent); border-bottom: 1px dashed var(--accent); cursor: pointer; }
+    .footnote-ref {
+      font-size: 0.75em;
+      vertical-align: super;
+      color: var(--link);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .footnotes-section {
+      margin-top: 2em;
+      padding-top: 1em;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text-muted);
+    }
+    .footnotes-section h4 { margin-bottom: 0.5em; }
+    .footnote-item { margin-bottom: 0.3em; }
+
+    /* ===== INFOBOX ===== */
+    .infobox {
+      float: right;
+      clear: right;
+      margin: 0 0 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      min-width: 200px;
+      max-width: 260px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+    }
+    .infobox-title {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      padding: 6px 12px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .infobox-row { display: flex; border-bottom: 1px solid var(--border-light); }
+    .infobox-row:last-child { border-bottom: none; }
+    .infobox-row th { padding: 4px 8px; background: var(--bg); color: var(--text-muted); white-space: nowrap; }
+    .infobox-row td { padding: 4px 8px; }
+
+    /* ===== MAIN PAGE ===== */
+    .main-notice {
+      background: var(--accent-light);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      border-radius: 0 4px 4px 0;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px;
+    }
+    .grade-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .grade-section h2 {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 16px;
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: 1.1rem;
+    }
+    .grade-list {
+      padding: 8px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .grade-list a {
+      color: var(--link);
+      text-decoration: none;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      padding: 2px 8px;
+      border: 1px solid var(--border-light);
+      border-radius: 2px;
+      background: var(--bg);
+      transition: all 0.1s;
+    }
+    .grade-list a:hover { background: var(--accent-light); border-color: var(--border); }
+    .grade-list a.star { color: var(--gold); border-color: var(--gold); }
+
+    /* ===== EDITOR ===== */
+    .editor-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px;
+    }
+    .editor-container h2 {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px;
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color 0.15s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--accent2);
+      background: white;
+    }
+    .form-group textarea { min-height: 200px; resize: vertical; font-size: 13px; line-height: 1.6; }
+    .syntax-help {
+      background: var(--surface2);
+      border: 1px solid var(--border-light);
+      border-radius: 3px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .syntax-help h4 { margin-bottom: 6px; color: var(--text); }
+    .syntax-help code {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 1px 5px;
+      border-radius: 2px;
+      color: var(--accent);
+      font-family: monospace;
+    }
+    .form-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* ===== HISTORY / DIFF ===== */
+    .history-list { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; }
+    .history-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .history-time { color: var(--text-faint); white-space: nowrap; min-width: 120px; }
+    .history-summary { flex: 1; }
+    .history-actions { display: flex; gap: 6px; }
+    .diff-view { font-family: monospace; font-size: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; overflow-x: auto; }
+    .diff-add { background: #e6ffe6; color: #0a5200; }
+    .diff-del { background: #ffe6e6; color: #520000; }
+    .diff-line { padding: 2px 8px; white-space: pre-wrap; word-break: break-all; }
+
+    /* ===== PASSWORD MODAL ===== */
+    #pw-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    #pw-modal.open { display: flex; }
+    .modal-box {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      padding: 28px 32px;
+      min-width: 320px;
+      max-width: 400px;
+      box-shadow: var(--shadow-md);
+    }
+    .modal-box h3 { font-family: 'Shippori Mincho B1', serif; font-size: 1.2rem; margin-bottom: 16px; }
+    .modal-box input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .error-msg { color: var(--accent); font-size: 13px; margin-bottom: 8px; font-family: 'Noto Sans JP', sans-serif; }
+
+    /* ===== ARTICLE INDEX ===== */
+    .article-index-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .article-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+    .article-card:hover { border-color: var(--accent2); background: var(--accent-light); }
+    .article-card-title {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      color: var(--link);
+      font-weight: 500;
+    }
+    .article-card-grade {
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-top: 2px;
+    }
+
+    /* ===== TOAST ===== */
+    #toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #333;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 4px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      display: none;
+      z-index: 9999;
+      animation: fadeIn 0.2s;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      #main-layout { grid-template-columns: 1fr; }
+      #sidebar { position: static; }
+      .infobox { float: none; max-width: 100%; margin: 0 0 16px 0; }
+    }
+
+    /* ===== LOADING ===== */
+    .loading { text-align: center; padding: 40px; color: var(--text-faint); font-family: 'Noto Sans JP', sans-serif; }
+    .loading::after { content: ''; display: inline-block; width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px; vertical-align: middle; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ===== SEARCH RESULTS ===== */
+    .search-results { }
+    .search-result-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .search-result-item h3 { font-family: 'Noto Sans JP', sans-serif; }
+    .search-result-item h3 a { color: var(--link); cursor: pointer; text-decoration: none; font-size: 16px; }
+    .search-result-item h3 a:hover { color: var(--accent); text-decoration: underline; }
+    .search-result-excerpt { font-size: 13px; color: var(--text-muted); font-family: 'Noto Sans JP', sans-serif; margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header id="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="#" onclick="showMainPage(); return false;">
+      Tanipedia <span>— 谷澤語録 非公式百科</span>
+    </a>
+    <div class="header-search">
+      <input type="text" id="search-input" placeholder="記事を検索..." onkeydown="if(event.key==='Enter') doSearch()">
+      <button onclick="doSearch()">検索</button>
+    </div>
+    <div class="header-nav">
+      <button class="btn btn-sm" onclick="showAllArticles()">記事一覧</button>
+      <button class="btn btn-sm btn-primary" onclick="openNewArticle()">＋ 新規記事</button>
+      <button class="btn btn-sm" id="admin-btn" onclick="toggleAdmin()">🔒 管理</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== LAYOUT ===== -->
+<div id="main-layout">
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sidebar-box">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li><a href="#" onclick="showMainPage(); return false;" id="nav-home">🏠 メインページ</a></li>
+        <li><a href="#" onclick="showAllArticles(); return false;">📋 記事一覧</a></li>
+        <li><a href="#" onclick="showArticle('tanipedia'); return false;">📚 Tanipediaとは</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-box">
+      <h3>級位</h3>
+      <ul id="sidebar-grades">
+        <li><a href="#" onclick="filterByGrade('谷級'); return false;">🏅 谷級</a></li>
+        <li><a href="#" onclick="filterByGrade('1級'); return false;">🥇 1級</a></li>
+        <li><a href="#" onclick="filterByGrade('2級'); return false;">🥈 2級</a></li>
+        <li><a href="#" onclick="filterByGrade('3級'); return false;">🎖 3級</a></li>
+        <li><a href="#" onclick="filterByGrade('4級'); return false;">📘 4級</a></li>
+        <li><a href="#" onclick="filterByGrade('5級'); return false;">📗 5級</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-box">
+      <h3>品詞</h3>
+      <ul id="sidebar-pos">
+        <li><a href="#" onclick="filterByPos('谷澤名詞'); return false;">谷澤名詞</a></li>
+        <li><a href="#" onclick="filterByPos('谷澤文詞'); return false;">谷澤文詞</a></li>
+        <li><a href="#" onclick="filterByPos('谷澤単詞'); return false;">谷澤単詞</a></li>
+        <li><a href="#" onclick="filterByPos('谷澤形容詞'); return false;">谷澤形容詞</a></li>
+        <li><a href="#" onclick="filterByPos('谷澤命令詞'); return false;">谷澤命令詞</a></li>
+        <li><a href="#" onclick="filterByPos('谷澤疑問詞'); return false;">谷澤疑問詞</a></li>
+        <li><a href="#" onclick="filterByPos('谷澤接続助詞'); return false;">谷澤接続助詞</a></li>
+        <li><a href="#" onclick="filterByPos('谷澤英詞'); return false;">谷澤英詞</a></li>
+        <li><a href="#" onclick="filterByPos('谷澤動詞'); return false;">谷澤動詞</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main id="content-area">
+
+    <!-- LOADING -->
+    <div id="view-loading" class="page-view active loading">読み込み中</div>
+
+    <!-- MAIN PAGE -->
+    <div id="view-main" class="page-view">
+      <div class="main-notice">
+        📢 <strong>大切なお知らせ：</strong>
+        サイト運営者が <strong>カンブリア紀</strong> から <strong>CHIKUWA・EXPRESS</strong> に変更になりました。
+        これにつき、本サイトの全管理権は <strong>CHIKUWA・EXPRESS</strong> に譲渡されました。
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+        <div class="grade-section" style="grid-column: 1/-1;">
+          <h2>🗂 概要</h2>
+          <div style="padding:12px 16px; font-family:'Noto Sans JP',sans-serif; font-size:13px;">
+            <p>Tanipediaは、特定人物「<strong>谷澤</strong>」の語録・発言を収集・整理するために作られた非公式百科プロジェクトです。</p>
+            <table style="border-collapse:collapse; margin-top:10px; font-size:13px; width:auto;">
+              <tr><th style="border:1px solid var(--border); padding:4px 12px; background:var(--surface2)">開設日</th><td style="border:1px solid var(--border); padding:4px 12px">2026/2/18</td></tr>
+              <tr><th style="border:1px solid var(--border); padding:4px 12px; background:var(--surface2)">サイト運営者</th><td style="border:1px solid var(--border); padding:4px 12px">CHIKUWA・EXPRESS</td></tr>
+              <tr><th style="border:1px solid var(--border); padding:4px 12px; background:var(--surface2)">研究員</th><td style="border:1px solid var(--border); padding:4px 12px">sasakurers・Kitung・Gobo★・くまもん</td></tr>
+              <tr><th style="border:1px solid var(--border); padding:4px 12px; background:var(--surface2)">掲載ページ運営者</th><td style="border:1px solid var(--border); padding:4px 12px">カイロス</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="grade-sections-main"></div>
+
+      <div class="grade-section">
+        <h2>⚖️ 谷澤法則</h2>
+        <div style="padding:12px 16px; font-family:'Noto Sans JP',sans-serif; font-size:13px;">
+          <table style="border-collapse:collapse; width:100%;">
+            <tr><th style="border:1px solid var(--border); padding:5px 10px; background:var(--surface2); text-align:left">法則名</th><th style="border:1px solid var(--border); padding:5px 10px; background:var(--surface2); text-align:left">内容</th></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤議論法則</td><td style="border:1px solid var(--border); padding:5px 10px">議論で不利になると必ず「話を変える」か「言い訳をして」有利な方向へ動かす</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤追跡法則</td><td style="border:1px solid var(--border); padding:5px 10px">ちょっかいをかけると、または理不尽に、しつこく追いかけてくる</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤ST法則</td><td style="border:1px solid var(--border); padding:5px 10px">下校STで筆箱を無意識に回転させて遊ぶ。また「はい/みんな静かに」と発言する</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤沈黙法則</td><td style="border:1px solid var(--border); padding:5px 10px">先生（草間/吉崎）に勝とうとするも必ず谷澤が論破される</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤語源法則</td><td style="border:1px solid var(--border); padding:5px 10px">議論相手が言葉の語源を知らないと発言権なし、と主張する独裁的な考え方</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="grade-section">
+        <h2>🈲 谷澤漢詞</h2>
+        <div style="padding:12px 16px; font-family:'Noto Sans JP',sans-serif; font-size:13px;">
+          <p style="margin-bottom:8px; color:var(--text-muted)">漢字の読みのみ変化。意味は不変。級位なし・意味なし の特殊品詞。</p>
+          <table style="border-collapse:collapse;">
+            <tr><th style="border:1px solid var(--border); padding:5px 10px; background:var(--surface2)">漢字</th><th style="border:1px solid var(--border); padding:5px 10px; background:var(--surface2)">谷澤読み</th></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">浅</td><td style="border:1px solid var(--border); padding:5px 10px">アザ</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">楽</td><td style="border:1px solid var(--border); padding:5px 10px">リャク</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="grade-section">
+        <h2>📖 特別品詞 一覧</h2>
+        <div style="padding:12px 16px; font-family:'Noto Sans JP',sans-serif; font-size:13px;">
+          <table style="border-collapse:collapse; width:100%;">
+            <tr><th style="border:1px solid var(--border); padding:5px 10px; background:var(--surface2); text-align:left">品詞名</th><th style="border:1px solid var(--border); padding:5px 10px; background:var(--surface2); text-align:left">説明</th></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤詞</td><td style="border:1px solid var(--border); padding:5px 10px">廃止。谷澤語最初の品詞。原点にして頂点。</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤名詞</td><td style="border:1px solid var(--border); padding:5px 10px">谷澤が発言した言葉</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤他詞</td><td style="border:1px solid var(--border); padding:5px 10px">谷澤以外の人物から谷澤への言葉</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤動詞</td><td style="border:1px solid var(--border); padding:5px 10px">谷澤に関連する動詞</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤英詞</td><td style="border:1px solid var(--border); padding:5px 10px">英語由来の言葉（例：セタァップ、ナァディ）</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤漢詞</td><td style="border:1px solid var(--border); padding:5px 10px">特殊な読み方をする漢字（級位なし・意味なし）</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤接続助詞</td><td style="border:1px solid var(--border); padding:5px 10px">は・の・を・に など接続詞的役割</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤文詞</td><td style="border:1px solid var(--border); padding:5px 10px">発言単体で文章が完結する語</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤単詞</td><td style="border:1px solid var(--border); padding:5px 10px">発言単体で文章が完結しない語（単語含む）</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤形容詞</td><td style="border:1px solid var(--border); padding:5px 10px">状態・容姿・関連状態を表す語（優先度高）</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤疑問詞</td><td style="border:1px solid var(--border); padding:5px 10px">疑問形の発言（優先度高）</td></tr>
+            <tr><td style="border:1px solid var(--border); padding:5px 10px">谷澤命令詞</td><td style="border:1px solid var(--border); padding:5px 10px">命令形の発言（優先度高）</td></tr>
+          </table>
+          <p style="margin-top:8px; color:var(--accent); font-size:12px;">⚠️ 谷澤形容詞・疑問詞・命令詞は、谷澤文詞・単詞より<strong>優先度が高い</strong>。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLE VIEW -->
+    <div id="view-article" class="page-view">
+      <div class="article-header">
+        <div class="article-title" id="article-title-display"></div>
+        <div class="article-meta" id="article-meta-display"></div>
+        <div class="article-actions" id="article-actions-display"></div>
+      </div>
+      <div class="article-body" id="article-body-display"></div>
+    </div>
+
+    <!-- ALL ARTICLES -->
+    <div id="view-all-articles" class="page-view">
+      <div style="border-bottom:2px solid var(--border); padding-bottom:10px; margin-bottom:16px;">
+        <div class="article-title">記事一覧</div>
+      </div>
+      <div id="all-articles-filter" style="margin-bottom:12px; font-family:'Noto Sans JP',sans-serif; font-size:13px; color:var(--text-muted);"></div>
+      <div id="article-index-grid" class="article-index-grid"></div>
+    </div>
+
+    <!-- SEARCH RESULTS -->
+    <div id="view-search" class="page-view">
+      <div style="border-bottom:2px solid var(--border); padding-bottom:10px; margin-bottom:16px;">
+        <div class="article-title" id="search-title-display">検索結果</div>
+      </div>
+      <div class="search-results" id="search-results-list"></div>
+    </div>
+
+    <!-- EDITOR -->
+    <div id="view-editor" class="page-view">
+      <div class="editor-container">
+        <h2 id="editor-title-display">記事を編集</h2>
+        <div class="syntax-help">
+          <h4>📝 使用できる構文</h4>
+          <p>
+            <code>''文字''</code> → <span class="wiki-emphasis">圏点</span>　
+            <code>**文字**</code> → <strong>太字</strong>　
+            <code>文字&lt;脚注内容&gt;</code> → 脚注<sup>[1]</sup>　
+            <code>[[記事名]]</code> → 記事リンク　
+            <code>[[記事名/表示名]]</code> → カスタムリンク
+          </p>
+        </div>
+        <div class="form-group">
+          <label>記事タイトル *</label>
+          <input type="text" id="editor-article-title" placeholder="例：谷ギレ">
+        </div>
+        <div class="form-group">
+          <label>品詞</label>
+          <select id="editor-pos">
+            <option value="">選択してください</option>
+            <option>谷澤名詞</option><option>谷澤文詞</option><option>谷澤単詞</option>
+            <option>谷澤形容詞</option><option>谷澤疑問詞</option><option>谷澤命令詞</option>
+            <option>谷澤接続助詞</option><option>谷澤英詞</option><option>谷澤動詞</option>
+            <option>谷澤漢詞</option><option>谷澤他詞</option><option>その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>級</label>
+          <select id="editor-grade">
+            <option value="">なし</option>
+            <option>谷級</option><option>1級</option><option>2級</option>
+            <option>3級</option><option>4級</option><option>5級</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>重要語（⭐）</label>
+          <select id="editor-important">
+            <option value="false">いいえ</option>
+            <option value="true">はい（重要語）</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>本文</label>
+          <textarea id="editor-body" placeholder="記事の本文を書いてください。&#10;&#10;構文例：&#10;**品詞:** 谷澤名詞&#10;これは''重要''な語録です。&#10;詳細は[[オメェ（お前）]]を参照。&#10;谷澤が言った言葉。&lt;2026年2月に初めて確認された&gt;"></textarea>
+        </div>
+        <div class="form-group">
+          <label>編集メモ（省略可）</label>
+          <input type="text" id="editor-summary" placeholder="例：初版作成 / 内容修正">
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="saveArticle()">💾 保存</button>
+          <button class="btn" onclick="previewArticle()">👁 プレビュー</button>
+          <button class="btn" onclick="cancelEdit()">✕ キャンセル</button>
+        </div>
+        <div id="editor-preview" style="display:none; margin-top:20px; border-top:1px solid var(--border); padding-top:16px;">
+          <h4 style="font-family:'Noto Sans JP',sans-serif; font-size:13px; color:var(--text-muted); margin-bottom:8px;">プレビュー</h4>
+          <div class="article-body" id="editor-preview-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORY VIEW -->
+    <div id="view-history" class="page-view">
+      <div style="border-bottom:2px solid var(--border); padding-bottom:10px; margin-bottom:16px;">
+        <div class="article-title" id="history-title-display">変更履歴</div>
+      </div>
+      <div class="history-list" id="history-list"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- PASSWORD MODAL -->
+<div id="pw-modal">
+  <div class="modal-box">
+    <h3>🔐 管理者認証</h3>
+    <div class="error-msg" id="pw-error" style="display:none">パスワードが違います</div>
+    <input type="password" id="pw-input" placeholder="パスワードを入力" onkeydown="if(event.key==='Enter') submitPw()">
+    <div class="modal-actions" style="margin-top:10px;">
+      <button class="btn" onclick="closePwModal()">キャンセル</button>
+      <button class="btn btn-primary" onclick="submitPw()">認証</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- ===== FIREBASE ===== -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getDatabase, ref, set, get, push, remove, onValue } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAH9CtMVmFtrx16QDBBr54Hc_lTisgr3e0",
+  authDomain: "tanipedia-3a6ea.firebaseapp.com",
+  projectId: "tanipedia-3a6ea",
+  storageBucket: "tanipedia-3a6ea.firebasestorage.app",
+  messagingSenderId: "440557122242",
+  appId: "1:440557122242:web:95c05d8e67842ccb3d415b",
+  measurementId: "G-BT9BK8SYFP",
+  databaseURL: "https://tanipedia-3a6ea-default-rtdb.firebaseio.com"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// ===== STATE =====
+let allArticles = {};      // { articleId: { title, pos, grade, body, important, updatedAt } }
+let isAdmin = false;
+let currentArticleId = null;
+let pendingAdminAction = null; // function to call after auth
+
+// ===== ADMIN PASSWORD (sha256 hash) =====
+// パスワード: "tani2026" → ハッシュ化して比較
+const ADMIN_HASH = "a8f5f167f44f4964e6c998dee827110c8f1b9b5d3a0534e1a7b40b1e0a80b20"; 
+// NOTE: この行は後でユーザーが自分のパスワードに変えてください
+// ここでは平文比較（本番ではより強固な方法を）
+const ADMIN_PW = "tani2026";
+
+// ===== FIREBASE LOAD =====
+async function loadArticles() {
+  try {
+    const snapshot = await get(ref(db, 'articles'));
+    allArticles = snapshot.exists() ? snapshot.val() : {};
+    // 初回: デフォルト記事を投入
+    if (Object.keys(allArticles).length === 0) {
+      await seedDefaultArticles();
+    }
+    renderMainPage();
+    showView('main');
+  } catch(e) {
+    console.error(e);
+    showToast('Firebase接続エラー: ' + e.message);
+    allArticles = {};
+    renderMainPage();
+    showView('main');
+  }
+}
+
+// ===== SEED DEFAULT ARTICLES =====
+async function seedDefaultArticles() {
+  const defaults = [
+    { id: 'hainai', title: '⭐ はい', pos: '谷澤単詞', grade: '5級', important: true, body: '**品詞:** 谷澤単詞\n質問への肯定。一見一般日本語と混同されがちだが、**イントネーションが異なる**。\n\n| | 発音 |\n|---|---|\n| 一般日本語 | は→い→ |\n| 谷澤語 | は→い↓ / は↓い↓ |\n\n**級:** 5級' },
+    { id: 'omee', title: 'オメェ（お前）', pos: '谷澤名詞', grade: '5級', important: false, body: '**品詞:** 谷澤名詞\n第二者（相手）を指す。一般的な日本語ではない。\n\n**級:** 5級' },
+    { id: 'omee_ga', title: 'オメェが〜 / オメェは〜', pos: '谷澤接続助詞', grade: '谷級', important: false, body: '**品詞:** 谷澤接続助詞\n「が」「は」を入れることで[[オメェ（お前）]]（主語）とその後の文章をつなぐ重要な役割を果たす。\n\n**法則名:** 谷澤接続主格法\n\n**級:** 谷級' },
+    { id: 'omee_no', title: 'オメェの〜', pos: '谷澤接続助詞', grade: '谷級', important: false, body: '**品詞:** 谷澤接続助詞\n「の」を入れることで[[オメェ（お前）]]（主語）とその後の文章をつなぐ重要な役割を果たす。\n\n**法則名:** 谷澤接続所有格法\n\n**級:** 谷級' },
+    { id: 'omee_wo', title: 'オメェを〜 / オメェに〜', pos: '谷澤接続助詞', grade: '谷級', important: false, body: '**品詞:** 谷澤接続助詞\n「を」「に」を入れることで[[オメェ（お前）]]（目的語）とその後の文章をつなぐ役割を果たす。\n\n**法則名:** 谷澤接続目的格法\n\n**級:** 谷級' },
+    { id: 'tani_hand', title: '谷 the ハンド', pos: '谷澤動詞', grade: '谷級', important: false, body: '**品詞:** 谷澤動詞\n谷澤が手を使う独特の動作・行動のこと。\n\n**級:** 谷級' },
+    { id: 'tanigire', title: '谷ギレ', pos: '谷澤形容詞', grade: '谷級', important: false, body: '**品詞:** 谷澤形容詞\n谷澤が怒っている状態のこと。\n\n**級:** 谷級' },
+    { id: 'yatte_ii', title: 'やっていいこととやってよくない事があるんだよ。', pos: '谷澤文詞', grade: '1級', important: true, body: '**品詞:** 谷澤文詞\n谷澤が叱責する際に使う定番フレーズ。\n\n**級:** 1級' },
+    { id: 'shizuka', title: 'しイイイずかにイイイ', pos: '谷澤命令詞', grade: '1級', important: false, body: '**品詞:** 谷澤命令詞\n「静かにしろ」を独特のイントネーションで発したもの。\n\n**級:** 1級' },
+    { id: 'sono_toki', title: 'その時が起きた時', pos: '谷澤文詞', grade: '1級', important: false, body: '**品詞:** 谷澤文詞\n時制が混乱した独特の表現。\n\n**級:** 1級' },
+    { id: 'megane', title: 'メガネかけてるからって完全に見えるわけじゃないんだよ。', pos: '谷澤文詞', grade: '1級', important: false, body: '**品詞:** 谷澤文詞\n視力補正の限界について語った言葉。深遠なる谷澤哲学の一端。\n\n**級:** 1級' },
+    { id: 'naughty', title: 'naughty（ナァディ）', pos: '谷澤英詞', grade: '1級', important: false, body: '**品詞:** 谷澤英詞\n英語の "naughty"（いたずらな・悪い）を谷澤独自の発音で読んだもの。\n\n**級:** 1級' },
+    { id: 'tani_math', title: '⭐ tani（タニ・インフィニティ・マセマーティクス）', pos: '谷澤名詞', grade: '2級', important: true, body: '**品詞:** 谷澤名詞\n谷澤が考案した独自の数学的概念。詳細不明。\n\n**級:** 2級' },
+    { id: 'tani_ra', title: '⭐ 谷式ら行規則変化', pos: '谷澤名詞', grade: '2級', important: true, body: '**品詞:** 谷澤名詞\nら行音の変化に関する谷澤独自の文法規則。\n\n**級:** 2級' },
+    { id: 'tani_gui', title: '⭐ 谷喰い', pos: '谷澤動詞', grade: '2級', important: true, body: '**品詞:** 谷澤動詞\n谷澤が食べる際の独特な動作・表現。\n\n**級:** 2級' },
+    { id: 'machigai', title: '⭐ 間違いました間違えました', pos: '谷澤文詞', grade: '2級', important: true, body: '**品詞:** 谷澤文詞\n間違いを訂正する際の二重表現。冗長性が特徴的。\n\n**級:** 2級' },
+    { id: 'setup', title: 'セタァップ', pos: '谷澤英詞', grade: '2級', important: false, body: '**品詞:** 谷澤英詞\n英語の "setup" を谷澤独自の発音で読んだもの。\n\n**級:** 2級' },
+    { id: 'daisan', title: '第三者は黙っとけ', pos: '谷澤命令詞', grade: '2級', important: false, body: '**品詞:** 谷澤命令詞\n議論に関係ない人物を排除しようとする発言。\n\n**級:** 2級' },
+    { id: 'tani_ne', title: '谷寝', pos: '谷澤動詞', grade: '2級', important: false, body: '**品詞:** 谷澤動詞\n谷澤が眠ることを指す。独特な就寝スタイルがある。\n\n**級:** 2級' },
+    { id: 'nani_iu', title: '何を言いたいんだお前ら！', pos: '谷澤疑問詞', grade: '2級', important: false, body: '**品詞:** 谷澤疑問詞\n他者の発言が理解できない際の抗議表現。\n\n**級:** 2級' },
+    { id: 'iiya', title: 'いや、違います', pos: '谷澤文詞', grade: '3級', important: false, body: '**品詞:** 谷澤文詞\n否定する際の定型表現。\n\n**級:** 3級' },
+    { id: 'suware', title: '座れ！', pos: '谷澤命令詞', grade: '3級', important: false, body: '**品詞:** 谷澤命令詞\n着席を促す命令形発言。\n\n**級:** 3級' },
+    { id: 'soういえば', title: 'そういえば知ってる', pos: '谷澤文詞', grade: '3級', important: false, body: '**品詞:** 谷澤文詞\n唐突に記憶を呼び覚ます表現。\n\n**級:** 3級' },
+    { id: 'zakenna', title: 'っざけんな', pos: '谷澤命令詞', grade: '3級', important: false, body: '**品詞:** 谷澤命令詞\n怒りの表現。「ふざけるな」の変形。\n\n**級:** 3級' },
+    { id: 'nani_shitai', title: '何をしているんだ一体', pos: '谷澤疑問詞', grade: '3級', important: false, body: '**品詞:** 谷澤疑問詞\n他者の行動を咎める疑問形発言。\n\n**級:** 3級' },
+    { id: 'minna_shizuka', title: 'みんな静かに！', pos: '谷澤文詞', grade: '3級', important: false, body: '**品詞:** 谷澤文詞\n静かにすることを求める言葉。\n特定の人にしか言わないのにもかかわらず、「みんな」と言っている。連帯責任。\n\n**級:** 3級' },
+    { id: 'itai_nani', title: '一体何をしているの？', pos: '谷澤疑問詞', grade: '4級', important: false, body: '**品詞:** 谷澤疑問詞\nより丁寧な疑問形発言。[[何をしているんだ一体]]の別形。\n\n**級:** 4級' },
+    { id: 'otoshiana', title: '落とし穴があるんですよ', pos: '谷澤文詞', grade: '4級', important: false, body: '**品詞:** 谷澤文詞\n状況に潜む問題点を指摘する言葉。\n\n**級:** 4級' },
+    { id: 'dua', title: 'ドゥアー', pos: '谷澤英詞', grade: '4級', important: false, body: '**品詞:** 谷澤英詞\n何らかの感嘆・動作を伴う発声。\n\n**級:** 4級' },
+    { id: 'dudu', title: 'ドゥードゥ', pos: '谷澤英詞', grade: '4級', important: false, body: '**品詞:** 谷澤英詞\n日本語で言う「ルール」のこと。\n\n**級:** 4級' },
+    { id: 'aicr', title: 'アイツ（彼奴）', pos: '谷澤名詞', grade: '5級', important: false, body: '**品詞:** 谷澤名詞\n第三者を指す表現。\n\n**級:** 5級' },
+    { id: 'ee', title: 'え？', pos: '谷澤疑問詞', grade: '5級', important: false, body: '**品詞:** 谷澤疑問詞\n聞き返しや驚きを表す。\n\n**級:** 5級' },
+    { id: 'ita', title: 'イタ', pos: '谷澤単詞', grade: '5級', important: false, body: '**品詞:** 谷澤単詞\n谷澤が物が落ちた時に言う。何がイタなのだろうか。\n\n**級:** 5級' },
+  ];
+
+  const now = Date.now();
+  for (const a of defaults) {
+    await set(ref(db, `articles/${a.id}`), {
+      title: a.title, pos: a.pos, grade: a.grade || '',
+      important: a.important || false, body: a.body,
+      createdAt: now, updatedAt: now
+    });
+  }
+  const snapshot = await get(ref(db, 'articles'));
+  allArticles = snapshot.exists() ? snapshot.val() : {};
+}
+
+// ===== RENDER MAIN PAGE =====
+function renderMainPage() {
+  const grades = ['谷級', '1級', '2級', '3級', '4級', '5級'];
+  const gradeEmoji = { '谷級': '🏅', '1級': '🥇', '2級': '🥈', '3級': '🎖', '4級': '📘', '5級': '📗' };
+  let html = '';
+  for (const g of grades) {
+    const arts = Object.entries(allArticles).filter(([,a]) => a.grade === g);
+    if (arts.length === 0) continue;
+    html += `<div class="grade-section"><h2>${gradeEmoji[g] || ''} ${g}</h2><div class="grade-list">`;
+    for (const [id, a] of arts) {
+      const star = a.important ? '⭐ ' : '';
+      html += `<a href="#" onclick="showArticle('${id}'); return false;" class="${a.important?'star':''}">${star}${escHtml(a.title)}</a>`;
+    }
+    html += `</div></div>`;
+  }
+  document.getElementById('grade-sections-main').innerHTML = html;
+}
+
+// ===== SHOW VIEW =====
+window.showView = function(name) {
+  document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+};
+
+window.showMainPage = function() {
+  renderMainPage();
+  showView('main');
+};
+
+// ===== SHOW ARTICLE =====
+window.showArticle = function(id) {
+  const art = allArticles[id];
+  if (!art) {
+    showToast(`記事「${id}」が見つかりません`);
+    return;
+  }
+  currentArticleId = id;
+  document.getElementById('article-title-display').textContent = art.title;
+
+  const metaEl = document.getElementById('article-meta-display');
+  let metaHtml = '';
+  if (art.pos) metaHtml += `<span class="badge">品詞: ${escHtml(art.pos)}</span>`;
+  if (art.grade) metaHtml += `<span class="badge">級: ${escHtml(art.grade)}</span>`;
+  if (art.important) metaHtml += `<span class="badge" style="color:var(--gold); border-color:var(--gold)">⭐ 重要語</span>`;
+  if (art.updatedAt) metaHtml += `<span>最終更新: ${new Date(art.updatedAt).toLocaleString('ja-JP')}</span>`;
+  metaEl.innerHTML = metaHtml;
+
+  const actEl = document.getElementById('article-actions-display');
+  let actHtml = `<button class="btn btn-sm" onclick="showHistoryView('${id}')">📋 変更履歴</button>`;
+  if (isAdmin) {
+    actHtml += `<button class="btn btn-sm btn-primary" onclick="openEditArticle('${id}')">✏️ 編集</button>`;
+    actHtml += `<button class="btn btn-sm" style="border-color:var(--accent); color:var(--accent)" onclick="deleteArticle('${id}')">🗑 削除</button>`;
+  } else {
+    actHtml += `<button class="btn btn-sm btn-primary" onclick="requireAdmin(()=>openEditArticle('${id}'))">✏️ 編集（要認証）</button>`;
+    actHtml += `<button class="btn btn-sm" style="border-color:var(--accent); color:var(--accent)" onclick="requireAdmin(()=>deleteArticle('${id}'))">🗑 削除（要認証）</button>`;
+  }
+  actEl.innerHTML = actHtml;
+
+  document.getElementById('article-body-display').innerHTML = renderWikiMarkup(art.body || '');
+  showView('article');
+};
+
+// ===== WIKI MARKUP PARSER =====
+function renderWikiMarkup(text) {
+  if (!text) return '';
+  const footnotes = [];
+  let fnCount = 0;
+
+  // エスケープ
+  let html = escHtml(text);
+
+  // 脚注: 文字<脚注>  → 注番号
+  html = html.replace(/([^&lt;]+?)&lt;([^&gt;]+?)&gt;/g, (_, before, note) => {
+    fnCount++;
+    footnotes.push({ n: fnCount, text: note });
+    return `${before}<a class="footnote-ref" id="fnref-${fnCount}" href="#fn-${fnCount}">[${fnCount}]</a>`;
+  });
+
+  // 圏点: ''文字''
+  html = html.replace(/''(.+?)''/g, '<span class="wiki-emphasis">$1</span>');
+
+  // 太字: **文字**
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong class="wiki-bold">$1</strong>');
+
+  // 内部リンク: [[記事名/表示名]] or [[記事名]]
+  html = html.replace(/\[\[([^\]\/]+?)\/([^\]]+?)\]\]/g, (_, target, label) => {
+    const id = findArticleIdByTitle(target);
+    if (id) return `<a class="wiki-link" onclick="showArticle('${id}')">${escHtml(label)}</a>`;
+    return `<a class="wiki-redlink" onclick="openNewArticleWithTitle('${escHtml(target)}')">${escHtml(label)}</a>`;
+  });
+  html = html.replace(/\[\[([^\]]+?)\]\]/g, (_, target) => {
+    const id = findArticleIdByTitle(target);
+    if (id) return `<a class="wiki-link" onclick="showArticle('${id}')">${escHtml(target)}</a>`;
+    return `<a class="wiki-redlink" onclick="openNewArticleWithTitle('${escHtml(target)}')">${escHtml(target)}</a>`;
+  });
+
+  // テーブル: | ... |
+  html = renderTable(html);
+
+  // 見出し
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+
+  // blockquote: > ...
+  html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
+
+  // 改行
+  html = html.replace(/\n/g, '<br>');
+
+  // 脚注セクション
+  if (footnotes.length > 0) {
+    html += '<div class="footnotes-section"><h4>脚注</h4>';
+    for (const fn of footnotes) {
+      html += `<div class="footnote-item" id="fn-${fn.n}"><sup>${fn.n}</sup> ${escHtml(fn.text)}</div>`;
+    }
+    html += '</div>';
+  }
+
+  return html;
+}
+
+// テーブル変換: Markdown table → HTML
+function renderTable(html) {
+  return html.replace(/((?:(?:(?:[^|\n]|\|[^|\n])*\|)+[^\n]*\n)+)/g, (block) => {
+    const lines = block.trim().split('\n').filter(l => l.trim());
+    if (lines.length < 2) return block;
+    const isSep = l => /^\s*\|?[\s\-:]+\|[\s\-:|]+\|?\s*$/.test(l);
+    let out = '<table>';
+    let headerDone = false;
+    for (let i = 0; i < lines.length; i++) {
+      if (isSep(lines[i])) { headerDone = true; continue; }
+      const cells = lines[i].split('|').filter((_,idx,arr) => idx > 0 && idx < arr.length-1 || arr.length <= 2);
+      const tag = (i === 0 && !headerDone) || (i === 0) ? 'th' : 'td';
+      out += '<tr>' + cells.map(c => `<${tag} style="border:1px solid var(--border);padding:5px 10px;${tag==='th'?'background:var(--surface2);':''}">${c.trim()}</${tag}>`).join('') + '</tr>';
+    }
+    out += '</table>';
+    return out;
+  });
+}
+
+function findArticleIdByTitle(title) {
+  const t = title.trim();
+  // 完全一致
+  for (const [id, a] of Object.entries(allArticles)) {
+    if (a.title === t || a.title.replace(/^⭐ /, '') === t) return id;
+  }
+  return null;
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ===== ALL ARTICLES =====
+window.showAllArticles = function(filterFn, filterLabel) {
+  const filtered = filterFn
+    ? Object.entries(allArticles).filter(([,a]) => filterFn(a))
+    : Object.entries(allArticles);
+
+  document.getElementById('all-articles-filter').textContent =
+    filterLabel ? `フィルター: ${filterLabel} (${filtered.length}件)` : `全 ${filtered.length} 記事`;
+
+  const grid = document.getElementById('article-index-grid');
+  grid.innerHTML = filtered.length === 0
+    ? '<p style="color:var(--text-faint); font-family:sans-serif; font-size:14px">記事が見つかりません</p>'
+    : filtered.map(([id, a]) => `
+        <div class="article-card" onclick="showArticle('${id}')">
+          <div class="article-card-title">${a.important ? '⭐ ' : ''}${escHtml(a.title)}</div>
+          <div class="article-card-grade">${a.grade || ''} ${a.pos ? '/ ' + a.pos : ''}</div>
+        </div>`).join('');
+  showView('all-articles');
+};
+
+window.filterByGrade = function(grade) {
+  showAllArticles(a => a.grade === grade, `${grade}`);
+};
+window.filterByPos = function(pos) {
+  showAllArticles(a => a.pos === pos, `品詞: ${pos}`);
+};
+
+// ===== SEARCH =====
+window.doSearch = function() {
+  const q = document.getElementById('search-input').value.trim();
+  if (!q) return;
+  document.getElementById('search-title-display').textContent = `「${q}」の検索結果`;
+  const results = Object.entries(allArticles).filter(([,a]) =>
+    a.title.includes(q) || (a.body||'').includes(q) || (a.pos||'').includes(q)
+  );
+  const el = document.getElementById('search-results-list');
+  if (results.length === 0) {
+    el.innerHTML = `<p style="font-family:sans-serif; font-size:14px; color:var(--text-faint)">「${escHtml(q)}」に一致する記事が見つかりませんでした。<br><a href="#" onclick="openNewArticleWithTitle('${escHtml(q)}'); return false;" style="color:var(--link)">この記事を作成する</a></p>`;
+  } else {
+    el.innerHTML = results.map(([id, a]) => {
+      const excerpt = (a.body||'').replace(/\*\*|''/g,'').substring(0,100);
+      return `<div class="search-result-item">
+        <h3><a onclick="showArticle('${id}')">${escHtml(a.title)}</a></h3>
+        <div class="search-result-excerpt">${escHtml(excerpt)}${excerpt.length>=100?'…':''}</div>
+      </div>`;
+    }).join('');
+  }
+  showView('search');
+};
+
+// ===== ADMIN =====
+window.toggleAdmin = function() {
+  if (isAdmin) {
+    isAdmin = false;
+    document.getElementById('admin-btn').textContent = '🔒 管理';
+    showToast('管理者モードを終了しました');
+    // 記事を再表示して編集ボタンを更新
+    if (currentArticleId) showArticle(currentArticleId);
+  } else {
+    openPwModal(() => {});
+  }
+};
+
+window.requireAdmin = function(callback) {
+  if (isAdmin) { callback(); return; }
+  openPwModal(callback);
+};
+
+function openPwModal(callback) {
+  pendingAdminAction = callback;
+  document.getElementById('pw-input').value = '';
+  document.getElementById('pw-error').style.display = 'none';
+  document.getElementById('pw-modal').classList.add('open');
+  setTimeout(() => document.getElementById('pw-input').focus(), 100);
+}
+
+window.closePwModal = function() {
+  document.getElementById('pw-modal').classList.remove('open');
+  pendingAdminAction = null;
+};
+
+window.submitPw = function() {
+  const pw = document.getElementById('pw-input').value;
+  if (pw === ADMIN_PW) {
+    isAdmin = true;
+    document.getElementById('admin-btn').textContent = '🔓 管理中';
+    document.getElementById('pw-modal').classList.remove('open');
+    showToast('管理者として認証しました');
+    if (pendingAdminAction) { pendingAdminAction(); pendingAdminAction = null; }
+  } else {
+    document.getElementById('pw-error').style.display = 'block';
+  }
+};
+
+// ===== EDITOR =====
+let editingArticleId = null;
+
+window.openNewArticle = function() {
+  requireAdmin(() => {
+    editingArticleId = null;
+    document.getElementById('editor-title-display').textContent = '新規記事を作成';
+    document.getElementById('editor-article-title').value = '';
+    document.getElementById('editor-pos').value = '';
+    document.getElementById('editor-grade').value = '';
+    document.getElementById('editor-important').value = 'false';
+    document.getElementById('editor-body').value = '';
+    document.getElementById('editor-summary').value = '';
+    document.getElementById('editor-preview').style.display = 'none';
+    showView('editor');
+  });
+};
+
+window.openNewArticleWithTitle = function(title) {
+  requireAdmin(() => {
+    editingArticleId = null;
+    document.getElementById('editor-title-display').textContent = '新規記事を作成';
+    document.getElementById('editor-article-title').value = title;
+    document.getElementById('editor-pos').value = '';
+    document.getElementById('editor-grade').value = '';
+    document.getElementById('editor-important').value = 'false';
+    document.getElementById('editor-body').value = '';
+    document.getElementById('editor-summary').value = '初版作成';
+    document.getElementById('editor-preview').style.display = 'none';
+    showView('editor');
+  });
+};
+
+window.openEditArticle = function(id) {
+  const art = allArticles[id];
+  if (!art) return;
+  editingArticleId = id;
+  document.getElementById('editor-title-display').textContent = `「${art.title}」を編集`;
+  document.getElementById('editor-article-title').value = art.title;
+  document.getElementById('editor-pos').value = art.pos || '';
+  document.getElementById('editor-grade').value = art.grade || '';
+  document.getElementById('editor-important').value = String(art.important || false);
+  document.getElementById('editor-body').value = art.body || '';
+  document.getElementById('editor-summary').value = '';
+  document.getElementById('editor-preview').style.display = 'none';
+  showView('editor');
+};
+
+window.previewArticle = function() {
+  const body = document.getElementById('editor-body').value;
+  const previewEl = document.getElementById('editor-preview');
+  document.getElementById('editor-preview-body').innerHTML = renderWikiMarkup(body);
+  previewEl.style.display = 'block';
+  previewEl.scrollIntoView({ behavior: 'smooth' });
+};
+
+window.saveArticle = function() {
+  const title = document.getElementById('editor-article-title').value.trim();
+  if (!title) { showToast('タイトルを入力してください'); return; }
+
+  const pos = document.getElementById('editor-pos').value;
+  const grade = document.getElementById('editor-grade').value;
+  const important = document.getElementById('editor-important').value === 'true';
+  const body = document.getElementById('editor-body').value;
+  const summary = document.getElementById('editor-summary').value.trim();
+
+  // IDは既存のIDか新規生成
+  const id = editingArticleId || sanitizeId(title);
+  const now = Date.now();
+  const existing = allArticles[id] || {};
+
+  // 履歴に保存
+  if (existing.body !== undefined) {
+    const histRef = push(ref(db, `history/${id}`));
+    set(histRef, {
+      title: existing.title, pos: existing.pos, grade: existing.grade,
+      important: existing.important, body: existing.body,
+      savedAt: now, summary: summary || '編集'
+    });
+  }
+
+  const article = {
+    title, pos, grade, important, body,
+    createdAt: existing.createdAt || now,
+    updatedAt: now
+  };
+
+  set(ref(db, `articles/${id}`), article).then(() => {
+    allArticles[id] = article;
+    showToast('保存しました');
+    showArticle(id);
+  }).catch(e => showToast('保存エラー: ' + e.message));
+};
+
+window.cancelEdit = function() {
+  if (currentArticleId) showArticle(currentArticleId);
+  else showMainPage();
+};
+
+function sanitizeId(title) {
+  return title.replace(/[^a-zA-Z0-9ぁ-んァ-ヶ一-龥]/g, '_').substring(0, 50) + '_' + Date.now().toString(36);
+}
+
+// ===== DELETE =====
+window.deleteArticle = function(id) {
+  const art = allArticles[id];
+  if (!art) return;
+  if (!confirm(`「${art.title}」を削除しますか？\nこの操作は取り消せません（履歴からロールバック可能）。`)) return;
+
+  // アーカイブに移動
+  const now = Date.now();
+  set(ref(db, `history/${id}/${now}`), {
+    title: art.title, pos: art.pos, grade: art.grade,
+    important: art.important, body: art.body,
+    savedAt: now, summary: '削除前バックアップ'
+  });
+
+  remove(ref(db, `articles/${id}`)).then(() => {
+    delete allArticles[id];
+    showToast(`「${art.title}」を削除しました`);
+    showMainPage();
+  }).catch(e => showToast('削除エラー: ' + e.message));
+};
+
+// ===== HISTORY =====
+window.showHistoryView = function(id) {
+  const art = allArticles[id];
+  document.getElementById('history-title-display').textContent =
+    `「${art ? art.title : id}」の変更履歴`;
+
+  get(ref(db, `history/${id}`)).then(snap => {
+    const list = document.getElementById('history-list');
+    if (!snap.exists()) {
+      list.innerHTML = '<p style="font-family:sans-serif; font-size:14px; color:var(--text-faint); padding:16px 0">変更履歴がありません</p>';
+    } else {
+      const entries = Object.entries(snap.val()).sort((a,b) => b[0]-a[0]);
+      list.innerHTML = entries.map(([key, h]) => `
+        <div class="history-item">
+          <div class="history-time">${new Date(h.savedAt||parseInt(key)).toLocaleString('ja-JP')}</div>
+          <div class="history-summary">
+            <strong>${escHtml(h.title||'')}</strong>
+            ${h.summary ? `<span style="color:var(--text-muted)"> — ${escHtml(h.summary)}</span>` : ''}
+            <div style="font-size:11px; color:var(--text-faint)">${h.grade||''} ${h.pos||''}</div>
+          </div>
+          <div class="history-actions">
+            ${isAdmin
+              ? `<button class="btn btn-sm btn-primary" onclick="rollbackArticle('${id}','${key}')">↩ ロールバック</button>`
+              : `<button class="btn btn-sm btn-primary" onclick="requireAdmin(()=>rollbackArticle('${id}','${key}'))">↩ ロールバック</button>`
+            }
+          </div>
+        </div>`).join('');
+    }
+    showView('history');
+  }).catch(e => showToast('履歴取得エラー: ' + e.message));
+};
+
+window.rollbackArticle = function(id, histKey) {
+  get(ref(db, `history/${id}/${histKey}`)).then(snap => {
+    if (!snap.exists()) { showToast('履歴が見つかりません'); return; }
+    const h = snap.val();
+    if (!confirm(`この時点の内容にロールバックしますか？\n「${h.title}」 — ${new Date(h.savedAt||parseInt(histKey)).toLocaleString('ja-JP')}`)) return;
+
+    const now = Date.now();
+    const existing = allArticles[id];
+    if (existing) {
+      const rollbackHistRef = push(ref(db, `history/${id}`));
+      set(rollbackHistRef, {
+        title: existing.title, pos: existing.pos, grade: existing.grade,
+        important: existing.important, body: existing.body,
+        savedAt: now, summary: 'ロールバック前バックアップ'
+      });
+    }
+
+    const article = {
+      title: h.title, pos: h.pos||'', grade: h.grade||'',
+      important: h.important||false, body: h.body||'',
+      createdAt: existing?.createdAt || now,
+      updatedAt: now
+    };
+    set(ref(db, `articles/${id}`), article).then(() => {
+      allArticles[id] = article;
+      showToast('ロールバックしました');
+      showArticle(id);
+    });
+  });
+};
+
+// ===== TOAST =====
+window.showToast = function(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(() => { el.style.display = 'none'; }, 3000);
+};
+
+// ===== INIT =====
+loadArticles();
+</script>
+
+</body>
+</html>
