@@ -161,10 +161,7 @@
     </div>
     <div class="sidebar-box">
       <h3>🌟 特別ページ</h3>
-      <ul>
-        <li><a onclick="showNovel()">📖 真夏の夜の谷澤</a></li>
-        <li><a onclick="showTerms()">⚖️ 利用規約</a></li>
-      </ul>
+      <ul id="sidebar-special"></ul>
     </div>
     <div class="sidebar-box">
       <h3>📊 サイト情報</h3>
@@ -186,16 +183,7 @@
       <div class="grade-section"><h2>🈲 谷澤漢詞</h2><div style="padding:12px 16px;font-family:'Noto Sans JP',sans-serif;font-size:13px"><p style="margin-bottom:8px;color:var(--text-muted)">漢字の読みのみ変化。意味は不変。級位なし・意味なし の特殊品詞。</p><table class="info-table"><tr><th>漢字</th><th>谷澤読み</th></tr><tr><td>浅</td><td>アザ</td></tr><tr><td>楽</td><td>リャク</td></tr></table></div></div>
       <div class="grade-section"><h2>📖 特別品詞 一覧</h2><div style="padding:12px 16px;font-family:'Noto Sans JP',sans-serif;font-size:13px"><table class="info-table" style="width:100%"><tr><th>品詞名</th><th>説明</th></tr><tr><td>谷澤詞</td><td>廃止。谷澤語最初の品詞。原点にして頂点。</td></tr><tr><td>谷澤名詞</td><td>谷澤が発言した言葉</td></tr><tr><td>谷澤他詞</td><td>谷澤以外の人物から谷澤への言葉</td></tr><tr><td>谷澤動詞</td><td>谷澤に関連する動詞</td></tr><tr><td>谷澤英詞</td><td>英語由来の言葉（例：セタァップ、ナァディ）</td></tr><tr><td>谷澤漢詞</td><td>特殊な読み方をする漢字（級位なし・意味なし）</td></tr><tr><td>谷澤接続助詞</td><td>は・の・を・に など接続詞的役割</td></tr><tr><td>谷澤文詞</td><td>発言単体で文章が完結する語</td></tr><tr><td>谷澤単詞</td><td>発言単体で文章が完結しない語（単語含む）</td></tr><tr><td>谷澤形容詞</td><td>状態・容姿・関連状態を表す語（優先度高）</td></tr><tr><td>谷澤疑問詞</td><td>疑問形の発言（優先度高）</td></tr><tr><td>谷澤命令詞</td><td>命令形の発言（優先度高）</td></tr></table><p style="margin-top:8px;color:var(--accent);font-size:12px">⚠️ 谷澤形容詞・疑問詞・命令詞は、谷澤文詞・単詞より<strong>優先度が高い</strong>。</p></div></div>
       <div class="grade-section"><h2>🆕 新仕様・その他</h2><div style="padding:12px 16px;font-family:'Noto Sans JP',sans-serif;font-size:13px"><table class="info-table" style="width:100%"><tr><th>項目</th><th>品詞</th><th>説明</th></tr><tr><td>谷澤接続主格法</td><td>谷級</td><td>オメェ「は/が」</td></tr><tr><td>谷澤接続所有格法</td><td>谷級</td><td>オメェ「の」</td></tr><tr><td>谷澤接続目的格法</td><td>谷級</td><td>オメェ「を/に」</td></tr><tr><td>谷澤感嘆符文</td><td>谷級</td><td>誇張表現などの末尾に「！」をつけた文</td></tr><tr><td>谷澤感嘆符疑問文類法</td><td>谷級</td><td>例：何が言いたいんだお前ら！</td></tr></table></div></div>
-      <div class="grade-section"><h2>🌟 特別ページ</h2><div style="padding:10px 16px;font-family:'Noto Sans JP',sans-serif;font-size:13px;display:flex;flex-direction:column;gap:8px">
-        <a onclick="showNovel()" style="display:block;padding:12px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text);text-decoration:none;cursor:pointer" onmouseover="this.style.background='var(--accent-light)'" onmouseout="this.style.background='var(--bg)'">
-          <div style="font-size:11px;color:var(--text-faint);margin-bottom:2px">世界初の谷澤小説 / ヤジュシコ世界遺産・国宝認定</div>
-          <div style="font-family:'Shippori Mincho B1',serif;font-size:1.1rem;font-weight:800">📖 真夏の夜の谷澤</div>
-          <div style="font-size:13px;color:var(--text-muted)">～4世代をマタぐ秘宝～　著：kitune.</div>
-        </a>
-        <a onclick="showTerms()" style="display:block;padding:10px 12px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text);text-decoration:none;cursor:pointer" onmouseover="this.style.background='var(--accent-light)'" onmouseout="this.style.background='var(--bg)'">
-          <span style="font-size:13px">⚖️ 利用規約</span>
-        </a>
-      </div></div>
+      <div class="grade-section"><h2>🌟 特別ページ</h2><div id="main-special-list" style="padding:10px 16px;font-family:'Noto Sans JP',sans-serif;font-size:13px;display:flex;flex-direction:column;gap:8px"></div></div>
       <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-family:'Noto Sans JP',sans-serif;font-size:12px;color:var(--text-faint);text-align:center">Tanipedia — 谷澤語録 百科<br>ーーー命をかけて頑張ります。ーーー kitune.</div>
     </div>
 
@@ -227,12 +215,28 @@
         <div class="syntax-help">
           <h4>📝 使用できる構文</h4>
           <p><code>''文字''</code> 圏点　<code>**文字**</code> 太字　<code>文字&lt;脚注&gt;</code> 脚注　<code>[[記事名]]</code> リンク　<code>[[記事名/表示名]]</code> カスタムリンク</p>
-          <p style="margin-top:4px">テーブル: <code>| 列1 | 列2 |</code>　引用: <code>&gt; テキスト</code></p>
+          <p style="margin-top:4px">テーブル: <code>| 列1 | 列2 |</code>　引用: <code>&gt; テキスト</code>　区切り線: <code>---</code>　章タイトル: <code>=== タイトル ===</code>　小見出し: <code>== タイトル ==</code></p>
         </div>
-        <div class="form-group"><label>記事タイトル *</label><input type="text" id="editor-article-title"></div>
-        <div class="form-group"><label>品詞</label><select id="editor-pos"><option value="">選択してください</option><option>谷澤名詞</option><option>谷澤文詞</option><option>谷澤単詞</option><option>谷澤形容詞</option><option>谷澤疑問詞</option><option>谷澤命令詞</option><option>谷澤接続助詞</option><option>谷澤英詞</option><option>谷澤動詞</option><option>谷澤詞</option><option>谷澤漢詞</option><option>谷澤他詞</option><option>なし</option></select></div>
-        <div class="form-group"><label>級</label><select id="editor-grade"><option value="">なし</option><option>谷級</option><option>1級</option><option>2級</option><option>3級</option><option>4級</option><option>5級</option></select></div>
-        <div class="form-group"><label>重要語（⭐）</label><select id="editor-important"><option value="false">いいえ</option><option value="true">はい</option></select></div>
+        <!-- ページ種別 -->
+        <div class="form-group">
+          <label>ページ種別 *</label>
+          <select id="editor-type" onchange="onEditorTypeChange()">
+            <option value="article">📄 記事（語録）</option>
+            <option value="special">🌟 特別ページ</option>
+          </select>
+        </div>
+        <div class="form-group"><label>タイトル *</label><input type="text" id="editor-article-title" placeholder="例：谷ギレ / 真夏の夜の谷澤"></div>
+        <!-- 記事専用フィールド -->
+        <div id="editor-article-fields">
+          <div class="form-group"><label>品詞</label><select id="editor-pos"><option value="">選択してください</option><option>谷澤名詞</option><option>谷澤文詞</option><option>谷澤単詞</option><option>谷澤形容詞</option><option>谷澤疑問詞</option><option>谷澤命令詞</option><option>谷澤接続助詞</option><option>谷澤英詞</option><option>谷澤動詞</option><option>谷澤詞</option><option>谷澤漢詞</option><option>谷澤他詞</option><option>なし</option></select></div>
+          <div class="form-group"><label>級</label><select id="editor-grade"><option value="">なし</option><option>谷級</option><option>1級</option><option>2級</option><option>3級</option><option>4級</option><option>5級</option></select></div>
+          <div class="form-group"><label>重要語（⭐）</label><select id="editor-important"><option value="false">いいえ</option><option value="true">はい</option></select></div>
+        </div>
+        <!-- 特別ページ専用フィールド -->
+        <div id="editor-special-fields" style="display:none">
+          <div class="form-group"><label>アイコン（絵文字）</label><input type="text" id="editor-icon" placeholder="例：📖"></div>
+          <div class="form-group"><label>説明文（サイドバー・メインページに表示）</label><input type="text" id="editor-description" placeholder="例：世界初の谷澤小説"></div>
+        </div>
         <div class="form-group"><label>本文</label><textarea id="editor-body"></textarea></div>
         <div class="form-group"><label>編集メモ（省略可）</label><input type="text" id="editor-summary" placeholder="例：初版作成 / 内容修正"></div>
         <div class="form-actions">
@@ -252,252 +256,16 @@
       <div class="history-list" id="history-list"></div>
     </div>
 
-    <!-- 小説ビュー -->
-    <div id="view-novel" class="page-view">
+    <!-- 特別ページビュー（動的生成） -->
+    <div id="view-special" class="page-view">
       <div class="article-header">
-        <div class="article-title">真夏の夜の谷澤</div>
-        <div class="article-meta">
-          <span class="badge">品詞: 物語</span>
-          <span class="badge">著: kitune.</span>
-          <span class="badge">3月7日発売</span>
-          <span class="badge badge-gold">ヤジュシコ世界遺産・国宝認定</span>
-        </div>
-        <div class="article-actions"><button class="btn btn-sm" onclick="showMainPage()">← トップへ戻る</button></div>
+        <div class="article-title" id="special-title-display"></div>
+        <div class="article-meta" id="special-meta-display"></div>
+        <div class="article-actions" id="special-actions-display"></div>
       </div>
-      <div class="article-body" id="novel-body">
-        <!-- 目次 -->
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px 16px;margin-bottom:24px;font-family:'Noto Sans JP',sans-serif;font-size:13px">
-          <div style="font-weight:700;margin-bottom:8px;color:var(--text-muted)">📑 目次</div>
-          <div style="color:var(--text-faint);font-size:12px;margin-bottom:4px">第1巻「第二次世界大戦編」――谷澤浩二の生涯――</div>
-          <a href="#nch1" class="wiki-link" style="display:block;padding:2px 0">第1章　浩二にしか見えない物</a>
-          <a href="#nch2" class="wiki-link" style="display:block;padding:2px 0">第2章　父が浩二にくれた物</a>
-          <a href="#nch3" class="wiki-link" style="display:block;padding:2px 0">第3章　最盛期の崩壊</a>
-          <a href="#nch4" class="wiki-link" style="display:block;padding:2px 0">第4章　戦争は利点を作らない</a>
-        </div>
-
-        <div style="background:var(--accent-light);border:1px solid var(--border);border-left:4px solid var(--accent2);padding:14px 18px;margin-bottom:28px;border-radius:0 4px 4px 0;font-family:'Noto Sans JP',sans-serif;font-size:13px;line-height:1.8;color:var(--text-muted)">
-          <strong style="color:var(--text)">【前置き】</strong><br>
-          本作は、現代の谷澤（谷澤4代目）から曾祖父である谷澤浩二（初代）までの、谷澤家4世代の歴史を描いたフィクション恋愛小説です。<br>
-          世界的な争いや国家規模の大事件は実際の歴史的事実を基にしていますが、登場人物の日常・感情・関係性はすべて創作です。<br>
-          本作には各世代にゲイ要素が含まれます。これは物語の重要な設定であり、変更されません。<br>
-          なお、5代目は本作に登場しません。4代目（T氏をモデルとした人物）は子供を作れず死亡するため、物語はここで幕を閉じます。
-        </div>
-
-        <div style="text-align:center;font-family:'Shippori Mincho B1',serif;font-size:1.05rem;margin-bottom:28px;color:var(--text-muted)">
-          第1巻「第二次世界大戦編」<br><span style="font-size:.9rem">――谷澤浩二の生涯――</span>
-        </div>
-
-        <hr style="border:none;border-top:1px solid var(--border);margin:32px 0">
-        <h2 id="nch1" style="font-family:'Shippori Mincho B1',serif;font-size:1.3rem;font-weight:800;margin-bottom:4px">第1章　浩二にしか見えない物</h2>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:12px;color:var(--text-faint);margin-bottom:20px;font-style:italic">――誕生から高校入学まで――</div>
-        <div style="font-family:'Noto Serif JP',serif;line-height:2;font-size:15px">
-          <p style="text-indent:1em;margin-bottom:1.2em">昭和三年、初夏。大阪の下町に一人の男児が産声を上げた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">谷澤浩二。それが彼の名だった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">父・谷澤義雄は小さな金物屋を営む実直な男で、母・さとは気立てのよい女だった。二人の間にはすでに姉が一人いたが、浩二は家にとって初めての男子であり、義雄はその誕生を殊のほか喜んだ。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">「浩二、お前はでかい男になれ」</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">揺り籠を揺らしながら義雄がそう言ったという話を、浩二は物心ついてから何度も聞かされた。でかい男。それが父の口癖だった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">しかし浩二は、幼い頃から「でかい男」とはかけ離れた感性を持っていた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">彼には、他の誰にも見えないものが見えた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">たとえば、近所の豆腐屋のおじさんの肩に、いつも薄青い光がまとわりついているのが見えた。それは悲しみの色だと、幼い浩二はなんとなく知っていた。おじさんの息子は去年、川で溺れて死んでいた。光はその子の残り香なのだと、浩二は一人で結論づけた。誰にも言わなかった。言えるはずがなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">またある日、学校の帰り道で、見知らぬ老婆が辻に立っているのを見た。老婆は浩二の目をじっと見て、「お前は見える子だねえ」とだけ言って、煙のように消えた。浩二は走って家に帰ったが、それから何日も、その老婆の目が夢に出た。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">母のさとはそんな浩二を「感じやすい子」と言って、特に咎めなかった。父の義雄は「男がそんな柔なことを言うな」と笑い飛ばした。浩二は次第に、見えるものについて黙るようになった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">小学校に上がると、浩二は成績のよい子として知られるようになった。特に国語と図画が得意で、作文を書けば先生に褒められ、絵を描けばクラスの壁に貼られた。しかし友達は少なかった。男の子たちのざわついた遊びの輪に、なんとなく馴染めなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">その代わり、浩二には一人の親友がいた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">田中正則。隣の組の、色白で細面の少年だった。正則は本が好きで、二人は放課後よく図書室に残って、肩を並べて本を読んだ。浩二が見えるものの話をすると、正則は馬鹿にせず「それはきっと本当のことだよ」と言った。浩二はその言葉が、何より嬉しかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">「浩二、お前は特別だと思う」</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">ある夕暮れ、二人で川沿いを歩いていたとき、正則がそう言った。夕陽が川面を橙色に染めていた。浩二は何も答えず、ただ正則の横顔を見た。その瞬間、自分の胸の奥に、今まで感じたことのない種類の温かさが灯ったことに気づいた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">それが何を意味するのか、当時の浩二にはまだわからなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">昭和十五年、春。浩二は十二歳になり、地元の中学校へと進んだ。時代は少しずつ、しかし確実に、重い色を帯び始めていた。新聞には毎日のように「皇軍の勝利」という文字が並び、ラジオからは勇ましい軍歌が流れた。父の義雄も近頃、いつになく険しい顔をすることが増えた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">中学に入ると、正則とは別々の組になった。それでも二人は変わらず、週に何度か会って話した。しかし浩二は気づき始めていた。自分が正則を見るときの気持ちが、友情と呼ぶにはどこか違う色をしていることに。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">その感情に名前を付けることを、浩二は恐れた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">中学三年の夏、正則の父親が召集令状を受け取った。正則はそれを浩二に告げたとき、初めて泣いた。浩二は何も言えず、ただ正則の隣に座っていた。二人の指が、草の上でそっと触れた。どちらも動かなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">その夜、浩二は自分の感情に、ようやく名前を付けた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">しかしその名前を、口に出すことは決してできなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">昭和十八年春、浩二は旧制高校の入学試験に合格した。合格通知を手にした義雄は、目を赤くして浩二の肩を叩いた。「でかい男になれよ」。父はまたその言葉を言った。浩二は笑って頷いた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">正則は別の学校へ進んだ。二人の道は、ここで静かに分かれた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">別れの日、正則は浩二に一冊の文庫本を手渡した。表紙には何も書かれていなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">「いつか、読んでみて」</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">正則はそれだけ言って、振り返らずに歩いていった。浩二はその背中を、見えなくなるまで見送った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">本の中には、一枚の紙が挟まっていた。そこには、正則の字で一言だけ書かれていた。</p>
-          <blockquote>――<em>お前のことが、好きだった。</em></blockquote>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二はその紙を、誰にも見せず、ずっと持ち続けた。</p>
-        </div>
-
-        <hr style="border:none;border-top:1px solid var(--border);margin:32px 0">
-        <h2 id="nch2" style="font-family:'Shippori Mincho B1',serif;font-size:1.3rem;font-weight:800;margin-bottom:4px">第2章　父が浩二にくれた物</h2>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:12px;color:var(--text-faint);margin-bottom:20px;font-style:italic">――高校入学、九州、そして訃報――</div>
-        <div style="font-family:'Noto Serif JP',serif;line-height:2;font-size:15px">
-          <p style="text-indent:1em;margin-bottom:1.2em">旧制高校に入った浩二は、大阪を離れ、寄宿舎のある学校へと移った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">そこは男ばかりの世界だった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">寄宿舎の夜は長かった。消灯後、薄暗い廊下を誰かが歩く音がした。笑い声が聞こえた。浩二は布団の中で目を開けたまま、天井を見つめた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">同室になったのは、川上という名の三年生だった。川上は色黒で背が高く、笑うと目が細くなった。浩二に対して妙に親切で、食堂での席を譲ったり、勉強を教えてくれたりした。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">ある夜、川上が浩二の布団の傍らに座った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">「お前、正直に答えてくれるか」</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">川上の声は低く、静かだった。浩二は何も言えなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">「俺はお前のことが気になってる。それだけだ」</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二の心臓が、奇妙な跳ね方をした。それは恐怖ではなかった。正則の横顔を見たあの夕暮れに似た、温かくて苦しい感覚だった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二はその夜、初めて自分の感情に従った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">それからしばらく、浩二と川上は互いだけが知る関係を続けた。表向きは先輩後輩の仲の良い間柄として、誰にも怪しまれることはなかった。しかし浩二の中では、罪悪感と解放感が常に綱引きをしていた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">父・義雄の言葉が耳をついた。「でかい男になれ」。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">これは、でかい男のすることではなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">高校二年の秋、川上は卒業を前に学徒出陣の対象となった。召集が決まった夜、川上は浩二にこう言った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">「俺が帰ったら、お前と普通に生きたかった。でもそんな世界じゃないな」</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">川上は笑っていた。その笑い方が、あまりにも穏やかだったので、浩二は何も言えなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">川上は翌春、南方の戦線で戦死した。二十一歳だった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">訃報を聞いた日、浩二は学校の裏の木立に一人で入り、声を殺して泣いた。木の幹に額をつけて、ずっと泣いた。それ以来、浩二は誰かに近づくことを自分に禁じた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">高校を卒業した浩二は、父の勧めもあり、九州の親戚のもとで商売の修行をすることになった。大阪を離れ、博多の町に移り住んだ浩二は、昼は問屋の仕事を手伝い、夜は簿記や商業の勉強をした。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">九州での生活は、浩二に規律を与えた。早起きし、体を動かし、帳簿をつけ、飯を食い、眠る。感情を持ち込む隙間などなかった。それが浩二には、ちょうどよかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">数年が経った。浩二は二十三歳になっていた。そろそろ大阪に帰ろうと思い始めていた頃、一通の電報が届いた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">――チチ　ジコ　キトク　スグカエレ</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二は荷物を抱えて、その日のうちに汽車に乗った。車窓を流れる景色を見ながら、浩二は父の顔を思い浮かべた。あの大きな手。金物屋のカウンターに立つ背中。「でかい男になれ」という言葉。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">大阪に着いたのは翌朝だった。しかし義雄は、その夜のうちに息を引き取っていた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">母・さとは憔悴し切った顔で、浩二を迎えた。「間に合わなかったね」とだけ言って、あとは何も言わなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二は父の亡骸の前に座り、長い時間、動けなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">義雄の手元に、一枚の紙があった。浩二への遺言のつもりだったらしく、震える字でこう書かれていた。</p>
-          <blockquote>――<em>浩二へ。お前は十分でかい男だ。あとは、幸せになれ。</em></blockquote>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二は、その紙をずっと握ったまま、夜が明けるまで父の傍にいた。</p>
-        </div>
-
-        <hr style="border:none;border-top:1px solid var(--border);margin:32px 0">
-        <h2 id="nch3" style="font-family:'Shippori Mincho B1',serif;font-size:1.3rem;font-weight:800;margin-bottom:4px">第3章　最盛期の崩壊</h2>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:12px;color:var(--text-faint);margin-bottom:20px;font-style:italic">――更生、婚約、幸福、そして召集――</div>
-        <div style="font-family:'Noto Serif JP',serif;line-height:2;font-size:15px">
-          <p style="text-indent:1em;margin-bottom:1.2em">父を失った浩二は、金物屋を継ぐことを決めた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">商売の才覚は、九州での修行で十分に磨かれていた。浩二は店を立て直し、二年もしないうちに近所での評判を取り戻した。母のさとも少しずつ元気を取り戻し、店を手伝うようになった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">昭和二十一年、終戦から一年が経っていた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">焼け野原から少しずつ息を吹き返す大阪の町で、浩二は一人の女性と出会った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">矢島京子。隣町の呉服屋の娘で、当時二十歳だった。京子は小柄で、目が大きく、よく笑う女だった。浩二の店に反物の代金を届けに来たのが最初の出会いだった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二は京子に、友人として接した。恋愛感情ではなかった。しかし京子と話していると、不思議と心が軽くなった。川上の死以来、ずっと固く閉じていた何かが、少しずつ溶けていくような感覚があった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">何度か会ううちに、浩二は自分が京子を必要としていることに気づいた。それは正則や川上への感情とは違う種類のものだったが、それもまた本物だと思った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">昭和二十二年の春、浩二は京子に求婚した。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">京子は少し驚いた顔をしたあと、「はい」と言った。その一言に、浩二はかつてないほど救われた気がした。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">翌年、二人は結婚した。さとは泣いて喜んだ。「お父さんに見せたかった」と何度も言った。浩二は笑って、心の中だけで父に報告した。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">昭和二十三年、長男・谷澤勇一が生まれた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">赤子を初めて抱いたとき、浩二の手が震えた。こんなに小さいのに、こんなに重いのだと思った。命というものの重さを、浩二は初めて手のひらで感じた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">店は繁盛した。家族は健やかだった。京子はよく笑い、勇一はよく泣き、さとはよく食べた。夕飯の卓を囲むたびに、浩二はこれが幸せというものだと思った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">父が言っていた「幸せになれ」という言葉が、ようやく形を持って目の前にあった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二は、この日々がずっと続くと信じていた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">しかし昭和二十四年の秋、一枚の紙が浩二の元に届いた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">戦後の混乱の中で再編成された軍の補充令に基づく、事実上の召集通知だった。占領下の複雑な政治情勢の中で、旧軍関係者や壮年男性を組み込もうとする動きが水面下で進んでいた。浩二にはその詳しい背景はわからなかった。ただ、行かなければならないことだけがわかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">京子は何も言わなかった。ただ、その夜だけは、浩二の腕の中で長い時間、動かなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">翌朝、浩二は勇一を抱き上げた。一歳になったばかりの息子は、父の顔をじっと見た。何かを理解しているような、しかし何もわかっていないような目だった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">「でかい男になれ」</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二は、父と同じ言葉を息子に言った。それ以外の言葉が、見つからなかった。</p>
-        </div>
-
-        <hr style="border:none;border-top:1px solid var(--border);margin:32px 0">
-        <h2 id="nch4" style="font-family:'Shippori Mincho B1',serif;font-size:1.3rem;font-weight:800;margin-bottom:4px">第4章　戦争は利点を作らない</h2>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:12px;color:var(--text-faint);margin-bottom:20px;font-style:italic">――浩二の最期――</div>
-        <div style="font-family:'Noto Serif JP',serif;line-height:2;font-size:15px">
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二が送られたのは、朝鮮半島に近い地域の後方支援部隊だった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">昭和二十五年、朝鮮戦争が勃発した。浩二の部隊は物資の輸送と通信の維持を担う役割だったが、戦線の混乱が拡大するにつれ、後方にも砲声が近づいてきた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二は日記をつけていた。</p>
-          <div style="background:var(--surface2);border:1px solid var(--border-light);border-radius:4px;padding:14px 18px;margin:1.2em 0;font-family:'Noto Sans JP',sans-serif;font-size:14px;line-height:1.9;color:var(--text-muted)">
-            今日も晴れ。この空の色を、勇一はいつか見るだろうか。<br><br>
-            京子の飯が食いたい。あの、出汁の利いた味噌汁が。<br><br>
-            戦争というものは、利点を何も作らない。壊すだけだ。それがわかっていても、ここにいる。それが人間というものかもしれない。
-          </div>
-          <p style="text-indent:1em;margin-bottom:1.2em">部隊の中に、中本という若い兵がいた。二十歳で、故郷に恋人がいると言った。浩二は中本に、よく話しかけた。息子の勇一が成長したらこんな感じかもしれないと思った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">ある夜、中本が浩二に言った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">「谷澤さんは怖くないんですか」</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">「怖いよ」と浩二は答えた。「毎日怖い。ただ、帰る場所があるから、それだけで立ってられる」</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">中本は少し考えてから、「俺も帰りたいです」と言った。浩二は「帰れる」と言った。根拠はなかった。しかしそう言うしかなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">昭和二十五年十一月。戦況が急変した。中国人民志願軍の大規模介入により、戦線は大きく動いた。浩二の部隊は輸送中に敵の先遣部隊と接触し、混乱の中で散り散りになった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二は中本をかばって、崩れた建物の陰に隠れた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">「谷澤さん！」</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">中本の声が聞こえた。浩二は「静かにしろ」と言った。しかし浩二自身は、自分の体に何かが起きていることに気づいていた。痛みではなかった。ただ、急速に何かが遠くなっていく感覚があった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">目を閉じると、大阪の夕暮れが見えた。川面の橙色。正則の横顔。父の手。京子の笑い声。勇一の小さな指。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">浩二には、見えないはずのものが見えた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">豆腐屋のおじさんの肩にまとわりついていた、薄青い光。あれは悲しみではなく、愛する者の残り香だったのかもしれない。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">自分にも今、そういうものが纏わりついているだろうかと、浩二は思った。</p>
-          <blockquote style="border-left:3px solid var(--accent2);padding:8px 16px;margin:1.5em 0;background:var(--accent-light);border-radius:0 3px 3px 0;font-style:italic;color:var(--text-muted)">父よ。でかい男には、なれただろうか。</blockquote>
-          <p style="text-indent:1em;margin-bottom:1.2em">谷澤浩二は、昭和二十五年十一月、享年二十二歳で、異国の地に散った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">遺品の中に、日記と、一冊の表紙のない文庫本があった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">本の間には、二枚の紙が挟まっていた。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">一枚は正則の字で、<em style="border-bottom:1px solid var(--text-muted)">お前のことが、好きだった。</em></p>
-          <p style="text-indent:1em;margin-bottom:1.2em">もう一枚は義雄の字で、<em style="border-bottom:1px solid var(--text-muted)">幸せになれ。</em></p>
-          <p style="text-indent:1em;margin-bottom:1.2em">京子はその二枚の紙を、生涯、大切にしまっておいた。何も聞かなかった。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">勇一は父の顔を覚えていなかった。しかし成長するにつれ、鏡を見るたびに、知らない誰かに似ていると思った。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">それが誰なのか、勇一はずっと後になって、ようやく理解した。</p>
-          <p style="text-indent:1em;margin-bottom:1.2em">谷澤家の物語は、続く。</p>
-        </div>
-
-        <div style="text-align:center;padding:32px 0;font-family:'Shippori Mincho B1',serif;font-size:1.1rem;color:var(--text-muted);border-top:2px solid var(--border);margin-top:40px">――第2巻へ――</div>
-      </div>
+      <div class="article-body" id="special-body-display"></div>
     </div>
-
-    <!-- 利用規約ビュー -->
-    <div id="view-terms" class="page-view">
-      <div class="article-header">
-        <div class="article-title">⚖️ 利用規約</div>
-        <div class="article-meta">
-          <span style="font-size:12px;color:var(--text-faint);font-family:'Noto Sans JP',sans-serif">制定日：2026年2月18日　｜　最終改定：2026年4月　｜　運営者：CHIKUWA・EXPRESS</span>
         </div>
-        <div class="article-actions"><button class="btn btn-sm" onclick="showMainPage()">← トップへ戻る</button></div>
-      </div>
-      <div class="article-body" style="font-family:'Noto Sans JP',sans-serif;font-size:14px;line-height:1.8">
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin-bottom:28px">
-          本規約は、<strong>Tanipedia（谷澤語録 百科）</strong>（以下「本サイト」）の利用に関する条件を定めるものです。<br>
-          本サイトにアクセスし、コンテンツを閲覧・利用した時点で、本規約に同意したものとみなします。<br>
-          本サイトは、当該人物の公式許可のもとで運営されるコミュニティ百科プロジェクトです。
-        </div>
-
-        <h2>📌 第1条（定義）</h2>
-        <ul style="list-style:none;padding:0;margin:12px 0 20px">
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light);position:relative">　<strong>本サイト</strong>：Tanipedia（谷澤語録 百科）およびそれに付随するすべてのページ・コンテンツ</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light);position:relative">　<strong>運営者</strong>：本サイトの管理・運営を行う CHIKUWA・EXPRESS</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light);position:relative">　<strong>研究員</strong>：語録の収集・調査・執筆を担当する sasakurers・Kitung・Gobo★・くまもん</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light);position:relative">　<strong>利用者</strong>：本サイトにアクセスするすべての人物</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light);position:relative">　<strong>谷澤語</strong>：本サイトが記録・整理の対象とする語録群の総称</li>
-        </ul>
-
-        <h2>📌 第2条（サイトの性質）</h2>
-        <ul style="list-style:none;padding:0;margin:12px 0 20px">
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　特定クラスのコミュニティ内で自然発生した語録・発言を記録・保存することを目的とした、有志による非営利の百科プロジェクトです。</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　本サイトは当該人物（谷澤）の公式許可のもとで運営されています。</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　本サイトは特定の個人を侮辱・誹謗中傷する目的では運営されておらず、あくまでコミュニティ文化の記録・保存を目的とします。</li>
-        </ul>
-
-        <h2>📌 第3条（禁止事項）</h2>
-        <ul style="list-style:none;padding:0;margin:12px 0 20px">
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　本サイトのコンテンツを無断で複製・転載・二次配布すること（引用の範囲を超えるもの）</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　他者を傷つける・侮辱する・誹謗中傷する内容を投稿すること</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　特定人物（谷澤）の名誉・プライバシーを著しく侵害する内容を拡散・投稿すること</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　虚偽の語録・事実を捏造してコンテンツに混入させること</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　本サイトのシステム・Firebase データベースへの不正アクセス・改ざん・攻撃行為</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　その他、運営者が不適切と判断する行為</li>
-        </ul>
-
-        <h2>📌 第4条（免責事項）</h2>
-        <ul style="list-style:none;padding:0;margin:12px 0 8px">
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　本サイトに掲載された情報の正確性・完全性・最新性について、運営者は一切の責任を負いません。</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　本サイトの利用により生じた直接的・間接的な損害について、運営者は一切の責任を負いません。</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　Firebaseを含む外部サービスの障害・仕様変更による影響について、運営者は一切の責任を負いません。</li>
-        </ul>
-        <div style="background:var(--accent-light);border-left:3px solid var(--accent2);padding:10px 14px;border-radius:0 3px 3px 0;font-size:13px;color:var(--text-muted);margin-bottom:20px">⚠️ 本サイトは非営利のコミュニティプロジェクトです。掲載情報の利用は利用者自身の判断と責任のもとで行ってください。</div>
-
-        <h2>📌 第5条（知的財産権）</h2>
-        <ul style="list-style:none;padding:0;margin:12px 0 20px">
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　本サイトのデザイン・コードの著作権は運営者に帰属します。</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　各語録の記述・解説文の著作権は、それを執筆した研究員・運営者に帰属します。</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　小説「真夏の夜の谷澤 ～4世代をマタぐ秘宝～」の著作権は著者 kitune. に帰属します。無断転載・改変は禁止します。</li>
-          <li style="padding:5px 0 5px 1.2em;border-bottom:1px solid var(--border-light)">　引用は出典（Tanipedia）を明記したうえで適切な範囲に限り認めます。</li>
-        </ul>
-
-        <h2>📌 第6条（規約の変更）</h2>
-        <p style="margin:12px 0 20px">運営者は、必要に応じて本規約を予告なく変更することができます。変更後の規約はこのページに掲載された時点から効力を持ちます。</p>
-
-        <h2>📋 改定履歴</h2>
-        <table class="wiki-table" style="width:100%;margin-top:12px">
-          <tr><th>日付</th><th>内容</th></tr>
-          <tr><td>2026年2月18日</td><td>Tanipedia 開設・初版制定</td></tr>
-          <tr><td>2026年3月7日</td><td>小説「真夏の夜の谷澤」掲載に伴い知的財産権条項を追記</td></tr>
-          <tr><td>2026年3月16日</td><td>サイト運営者変更（カンブリア紀 → CHIKUWA・EXPRESS）</td></tr>
-          <tr><td>2026年4月</td><td>公式許可取得に伴い第2条を改定。「非公式」表記を削除</td></tr>
-          <tr><td>2026年4月</td><td>サイト内ページとして統合。外部ファイルを廃止</td></tr>
-        </table>
-      </div>
-    </div>
   </main>
 </div>
 
@@ -621,6 +389,8 @@ async function loadArticles() {
   }
   updateStats();
   renderSidebarImportant();
+  await loadSpecialPages();
+  renderSidebarSpecial();
   renderMainGrades();
   showView('main');
 }
@@ -649,8 +419,393 @@ function renderMainGrades() {
 
 window.showView=n=>{document.querySelectorAll('.page-view').forEach(el=>el.classList.remove('active'));document.getElementById('view-'+n).classList.add('active');};
 window.showMainPage=()=>{renderMainGrades();showView('main');};
-window.showNovel=()=>showView('novel');
-window.showTerms=()=>showView('terms');
+window.showView=n=>{document.querySelectorAll('.page-view').forEach(el=>el.classList.remove('active'));document.getElementById('view-'+n).classList.add('active');};
+window.showMainPage=()=>{renderMainGrades();showView('main');};
+
+// ===== 特別ページ管理 =====
+let allSpecialPages = {}; // { id: { title, icon, description, body, createdAt, updatedAt } }
+
+// 特別ページをFirebaseからロード（初回SEEDも含む）
+async function loadSpecialPages() {
+  const snap = await get(ref(db, 'specialPages'));
+  if (snap.exists()) {
+    allSpecialPages = snap.val();
+  } else {
+    // 既存の小説・利用規約をSEEDとして投入
+    await seedSpecialPages();
+  }
+}
+
+async function seedSpecialPages() {
+  const now = Date.now();
+  const novelBody = `**著:** kitune.　**発売日:** 3月7日　**認定:** ヤジュシコ世界遺産・国宝認定
+
+> 本作は、現代の谷澤（谷澤4代目）から曾祖父である谷澤浩二（初代）までの、谷澤家4世代の歴史を描いたフィクション恋愛小説です。世界的な争いや国家規模の大事件は実際の歴史的事実を基にしていますが、登場人物の日常・感情・関係性はすべて創作です。本作には各世代にゲイ要素が含まれます。これは物語の重要な設定であり、変更されません。なお、5代目は本作に登場しません。4代目（T氏をモデルとした人物）は子供を作れず死亡するため、物語はここで幕を閉じます。
+
+---
+
+=== 第1巻「第二次世界大戦編」 ===
+**――谷澤浩二の生涯――**
+
+---
+
+== 第1章　浩二にしか見えない物 ==
+**――誕生から高校入学まで――**
+
+昭和三年、初夏。大阪の下町に一人の男児が産声を上げた。
+
+谷澤浩二。それが彼の名だった。
+
+父・谷澤義雄は小さな金物屋を営む実直な男で、母・さとは気立てのよい女だった。二人の間にはすでに姉が一人いたが、浩二は家にとって初めての男子であり、義雄はその誕生を殊のほか喜んだ。
+
+「浩二、お前はでかい男になれ」
+
+揺り籠を揺らしながら義雄がそう言ったという話を、浩二は物心ついてから何度も聞かされた。でかい男。それが父の口癖だった。
+
+しかし浩二は、幼い頃から「でかい男」とはかけ離れた感性を持っていた。
+
+彼には、他の誰にも見えないものが見えた。
+
+たとえば、近所の豆腐屋のおじさんの肩に、いつも薄青い光がまとわりついているのが見えた。それは悲しみの色だと、幼い浩二はなんとなく知っていた。おじさんの息子は去年、川で溺れて死んでいた。光はその子の残り香なのだと、浩二は一人で結論づけた。誰にも言わなかった。言えるはずがなかった。
+
+またある日、学校の帰り道で、見知らぬ老婆が辻に立っているのを見た。老婆は浩二の目をじっと見て、「お前は見える子だねえ」とだけ言って、煙のように消えた。浩二は走って家に帰ったが、それから何日も、その老婆の目が夢に出た。
+
+母のさとはそんな浩二を「感じやすい子」と言って、特に咎めなかった。父の義雄は「男がそんな柔なことを言うな」と笑い飛ばした。浩二は次第に、見えるものについて黙るようになった。
+
+小学校に上がると、浩二は成績のよい子として知られるようになった。特に国語と図画が得意で、作文を書けば先生に褒められ、絵を描けばクラスの壁に貼られた。しかし友達は少なかった。男の子たちのざわついた遊びの輪に、なんとなく馴染めなかった。
+
+その代わり、浩二には一人の親友がいた。
+
+田中正則。隣の組の、色白で細面の少年だった。正則は本が好きで、二人は放課後よく図書室に残って、肩を並べて本を読んだ。浩二が見えるものの話をすると、正則は馬鹿にせず「それはきっと本当のことだよ」と言った。浩二はその言葉が、何より嬉しかった。
+
+「浩二、お前は特別だと思う」
+
+ある夕暮れ、二人で川沿いを歩いていたとき、正則がそう言った。夕陽が川面を橙色に染めていた。浩二は何も答えず、ただ正則の横顔を見た。その瞬間、自分の胸の奥に、今まで感じたことのない種類の温かさが灯ったことに気づいた。
+
+それが何を意味するのか、当時の浩二にはまだわからなかった。
+
+昭和十五年、春。浩二は十二歳になり、地元の中学校へと進んだ。時代は少しずつ、しかし確実に、重い色を帯び始めていた。新聞には毎日のように「皇軍の勝利」という文字が並び、ラジオからは勇ましい軍歌が流れた。父の義雄も近頃、いつになく険しい顔をすることが増えた。
+
+中学に入ると、正則とは別々の組になった。それでも二人は変わらず、週に何度か会って話した。しかし浩二は気づき始めていた。自分が正則を見るときの気持ちが、友情と呼ぶにはどこか違う色をしていることに。
+
+その感情に名前を付けることを、浩二は恐れた。
+
+中学三年の夏、正則の父親が召集令状を受け取った。正則はそれを浩二に告げたとき、初めて泣いた。浩二は何も言えず、ただ正則の隣に座っていた。二人の指が、草の上でそっと触れた。どちらも動かなかった。
+
+その夜、浩二は自分の感情に、ようやく名前を付けた。
+
+しかしその名前を、口に出すことは決してできなかった。
+
+昭和十八年春、浩二は旧制高校の入学試験に合格した。合格通知を手にした義雄は、目を赤くして浩二の肩を叩いた。「でかい男になれよ」。父はまたその言葉を言った。浩二は笑って頷いた。
+
+正則は別の学校へ進んだ。二人の道は、ここで静かに分かれた。
+
+別れの日、正則は浩二に一冊の文庫本を手渡した。表紙には何も書かれていなかった。
+
+「いつか、読んでみて」
+
+正則はそれだけ言って、振り返らずに歩いていった。浩二はその背中を、見えなくなるまで見送った。
+
+本の中には、一枚の紙が挟まっていた。そこには、正則の字で一言だけ書かれていた。
+
+> ――お前のことが、好きだった。
+
+浩二はその紙を、誰にも見せず、ずっと持ち続けた。
+
+---
+
+== 第2章　父が浩二にくれた物 ==
+**――高校入学、九州、そして訃報――**
+
+旧制高校に入った浩二は、大阪を離れ、寄宿舎のある学校へと移った。
+
+そこは男ばかりの世界だった。
+
+寄宿舎の夜は長かった。消灯後、薄暗い廊下を誰かが歩く音がした。笑い声が聞こえた。浩二は布団の中で目を開けたまま、天井を見つめた。
+
+同室になったのは、川上という名の三年生だった。川上は色黒で背が高く、笑うと目が細くなった。浩二に対して妙に親切で、食堂での席を譲ったり、勉強を教えてくれたりした。
+
+ある夜、川上が浩二の布団の傍らに座った。
+
+「お前、正直に答えてくれるか」
+
+川上の声は低く、静かだった。浩二は何も言えなかった。
+
+「俺はお前のことが気になってる。それだけだ」
+
+浩二の心臓が、奇妙な跳ね方をした。それは恐怖ではなかった。正則の横顔を見たあの夕暮れに似た、温かくて苦しい感覚だった。
+
+浩二はその夜、初めて自分の感情に従った。
+
+それからしばらく、浩二と川上は互いだけが知る関係を続けた。表向きは先輩後輩の仲の良い間柄として、誰にも怪しまれることはなかった。しかし浩二の中では、罪悪感と解放感が常に綱引きをしていた。
+
+父・義雄の言葉が耳をついた。「でかい男になれ」。
+
+これは、でかい男のすることではなかった。
+
+高校二年の秋、川上は卒業を前に学徒出陣の対象となった。召集が決まった夜、川上は浩二にこう言った。
+
+「俺が帰ったら、お前と普通に生きたかった。でもそんな世界じゃないな」
+
+川上は笑っていた。その笑い方が、あまりにも穏やかだったので、浩二は何も言えなかった。
+
+川上は翌春、南方の戦線で戦死した。二十一歳だった。
+
+訃報を聞いた日、浩二は学校の裏の木立に一人で入り、声を殺して泣いた。木の幹に額をつけて、ずっと泣いた。それ以来、浩二は誰かに近づくことを自分に禁じた。
+
+高校を卒業した浩二は、父の勧めもあり、九州の親戚のもとで商売の修行をすることになった。大阪を離れ、博多の町に移り住んだ浩二は、昼は問屋の仕事を手伝い、夜は簿記や商業の勉強をした。
+
+九州での生活は、浩二に規律を与えた。早起きし、体を動かし、帳簿をつけ、飯を食い、眠る。感情を持ち込む隙間などなかった。それが浩二には、ちょうどよかった。
+
+数年が経った。浩二は二十三歳になっていた。そろそろ大阪に帰ろうと思い始めていた頃、一通の電報が届いた。
+
+――チチ　ジコ　キトク　スグカエレ
+
+浩二は荷物を抱えて、その日のうちに汽車に乗った。大阪に着いたのは翌朝だった。しかし義雄は、その夜のうちに息を引き取っていた。
+
+母・さとは憔悴し切った顔で、浩二を迎えた。「間に合わなかったね」とだけ言って、あとは何も言わなかった。
+
+浩二は父の亡骸の前に座り、長い時間、動けなかった。
+
+義雄の手元に、一枚の紙があった。震える字でこう書かれていた。
+
+> ――浩二へ。お前は十分でかい男だ。あとは、幸せになれ。
+
+浩二は、その紙をずっと握ったまま、夜が明けるまで父の傍にいた。
+
+---
+
+== 第3章　最盛期の崩壊 ==
+**――更生、婚約、幸福、そして召集――**
+
+父を失った浩二は、金物局を継ぐことを決めた。
+
+商売の才覚は、九州での修行で十分に磨かれていた。浩二は店を立て直し、二年もしないうちに近所での評判を取り戻した。母のさとも少しずつ元気を取り戻し、店を手伝うようになった。
+
+昭和二十一年、終戦から一年が経っていた。
+
+焼け野原から少しずつ息を吹き返す大阪の町で、浩二は一人の女性と出会った。
+
+矢島京子。隣町の呉服屋の娘で、当時二十歳だった。京子は小柄で、目が大きく、よく笑う女だった。浩二の店に反物の代金を届けに来たのが最初の出会いだった。
+
+浩二は京子に、友人として接した。恋愛感情ではなかった。しかし京子と話していると、不思議と心が軽くなった。川上の死以来、ずっと固く閉じていた何かが、少しずつ溶けていくような感覚があった。
+
+何度か会ううちに、浩二は自分が京子を必要としていることに気づいた。それは正則や川上への感情とは違う種類のものだったが、それもまた本物だと思った。
+
+昭和二十二年の春、浩二は京子に求婚した。
+
+京子は少し驚いた顔をしたあと、「はい」と言った。その一言に、浩二はかつてないほど救われた気がした。
+
+翌年、二人は結婚した。さとは泣いて喜んだ。「お父さんに見せたかった」と何度も言った。浩二は笑って、心の中だけで父に報告した。
+
+昭和二十三年、長男・谷澤勇一が生まれた。
+
+赤子を初めて抱いたとき、浩二の手が震えた。こんなに小さいのに、こんなに重いのだと思った。命というものの重さを、浩二は初めて手のひらで感じた。
+
+店は繁盛した。家族は健やかだった。浩二は、この日々がずっと続くと信じていた。
+
+しかし昭和二十四年の秋、一枚の紙が浩二の元に届いた。
+
+戦後の混乱の中で再編成された軍の補充令に基づく、事実上の召集通知だった。ただ、行かなければならないことだけがわかった。
+
+京子は何も言わなかった。ただ、その夜だけは、浩二の腕の中で長い時間、動かなかった。
+
+翌朝、浩二は勇一を抱き上げた。一歳になったばかりの息子は、父の顔をじっと見た。
+
+「でかい男になれ」
+
+浩二は、父と同じ言葉を息子に言った。それ以外の言葉が、見つからなかった。
+
+---
+
+== 第4章　戦争は利点を作らない ==
+**――浩二の最期――**
+
+浩二が送られたのは、朝鮮半島に近い地域の後方支援部隊だった。
+
+昭和二十五年、朝鮮戦争が勃発した。浩二の部隊は物資の輸送と通信の維持を担う役割だったが、戦線の混乱が拡大するにつれ、後方にも砲声が近づいてきた。
+
+浩二は日記をつけていた。
+
+> 今日も晴れ。この空の色を、勇一はいつか見るだろうか。
+> 京子の飯が食いたい。あの、出汁の利いた味噌汁が。
+> 戦争というものは、利点を何も作らない。壊すだけだ。それがわかっていても、ここにいる。それが人間というものかもしれない。
+
+部隊の中に、中本という若い兵がいた。二十歳で、故郷に恋人がいると言った。浩二は中本に、よく話しかけた。息子の勇一が成長したらこんな感じかもしれないと思った。
+
+ある夜、中本が浩二に言った。
+
+「谷澤さんは怖くないんですか」
+
+「怖いよ」と浩二は答えた。「毎日怖い。ただ、帰る場所があるから、それだけで立ってられる」
+
+中本は少し考えてから、「俺も帰りたいです」と言った。浩二は「帰れる」と言った。根拠はなかった。しかしそう言うしかなかった。
+
+昭和二十五年十一月。戦況が急変した。浩二の部隊は輸送中に敵の先遣部隊と接触し、混乱の中で散り散りになった。
+
+浩二は中本をかばって、崩れた建物の陰に隠れた。
+
+「谷澤さん！」
+
+中本の声が聞こえた。浩二は「静かにしろ」と言った。しかし浩二自身は、自分の体に何かが起きていることに気づいていた。痛みではなかった。ただ、急速に何かが遠くなっていく感覚があった。
+
+目を閉じると、大阪の夕暮れが見えた。川面の橙色。正則の横顔。父の手。京子の笑い声。勇一の小さな指。
+
+> 父よ。でかい男には、なれただろうか。
+
+谷澤浩二は、昭和二十五年十一月、享年二十二歳で、異国の地に散った。
+
+遺品の中に、日記と、一冊の表紙のない文庫本があった。本の間には、二枚の紙が挟まっていた。
+
+一枚は正則の字で、''お前のことが、好きだった。''
+
+もう一枚は義雄の字で、''幸せになれ。''
+
+京子はその二枚の紙を、生涯、大切にしまっておいた。何も聞かなかった。
+
+勇一は父の顔を覚えていなかった。しかし成長するにつれ、鏡を見るたびに、知らない誰かに似ていると思った。
+
+谷澤家の物語は、続く。
+
+---
+
+**――第2巻へ――**`;
+
+  const termsBody = `**制定日:** 2026年2月18日　**最終改定:** 2026年4月　**運営者:** CHIKUWA・EXPRESS
+
+本規約は、**Tanipedia（谷澤語録 百科）**（以下「本サイト」）の利用に関する条件を定めるものです。本サイトにアクセスし、コンテンツを閲覧・利用した時点で、本規約に同意したものとみなします。本サイトは、当該人物の公式許可のもとで運営されるコミュニティ百科プロジェクトです。
+
+---
+
+== 第1条（定義） ==
+
+| 用語 | 定義 |
+|---|---|
+| 本サイト | Tanipedia（谷澤語録 百科）およびそれに付随するすべてのページ・コンテンツ |
+| 運営者 | 本サイトの管理・運営を行う CHIKUWA・EXPRESS |
+| 研究員 | 語録の収集・調査・執筆を担当する sasakurers・Kitung・Gobo★・くまもん |
+| 利用者 | 本サイトにアクセスするすべての人物 |
+| 谷澤語 | 本サイトが記録・整理の対象とする語録群の総称 |
+
+---
+
+== 第2条（サイトの性質） ==
+
+特定クラスのコミュニティ内で自然発生した語録・発言を記録・保存することを目的とした、有志による非営利の百科プロジェクトです。本サイトは当該人物（谷澤）の公式許可のもとで運営されています。本サイトは特定の個人を侮辱・誹謗中傷する目的では運営されておらず、あくまでコミュニティ文化の記録・保存を目的とします。
+
+---
+
+== 第3条（禁止事項） ==
+
+本サイトのコンテンツを無断で複製・転載・二次配布すること（引用の範囲を超えるもの）。他者を傷つける・侮辱する・誹謗中傷する内容を投稿すること。特定人物（谷澤）の名誉・プライバシーを著しく侵害する内容を拡散・投稿すること。虚偽の語録・事実を捏造してコンテンツに混入させること。本サイトのシステム・Firebase データベースへの不正アクセス・改ざん・攻撃行為。その他、運営者が不適切と判断する行為。
+
+---
+
+== 第4条（免責事項） ==
+
+本サイトに掲載された情報の正確性・完全性・最新性について、運営者は一切の責任を負いません。本サイトの利用により生じた直接的・間接的な損害について、運営者は一切の責任を負いません。Firebaseを含む外部サービスの障害・仕様変更による影響について、運営者は一切の責任を負いません。
+
+> ⚠️ 本サイトは非営利のコミュニティプロジェクトです。掲載情報の利用は利用者自身の判断と責任のもとで行ってください。
+
+---
+
+== 第5条（知的財産権） ==
+
+本サイトのデザイン・コードの著作権は運営者に帰属します。各語録の記述・解説文の著作権は、それを執筆した研究員・運営者に帰属します。小説「真夏の夜の谷澤 ～4世代をマタぐ秘宝～」の著作権は著者 kitune. に帰属します。無断転載・改変は禁止します。引用は出典（Tanipedia）を明記したうえで適切な範囲に限り認めます。
+
+---
+
+== 第6条（規約の変更） ==
+
+運営者は、必要に応じて本規約を予告なく変更することができます。変更後の規約はこのページに掲載された時点から効力を持ちます。
+
+---
+
+== 改定履歴 ==
+
+| 日付 | 内容 |
+|---|---|
+| 2026年2月18日 | Tanipedia 開設・初版制定 |
+| 2026年3月7日 | 小説「真夏の夜の谷澤」掲載に伴い知的財産権条項を追記 |
+| 2026年3月16日 | サイト運営者変更（カンブリア紀 → CHIKUWA・EXPRESS） |
+| 2026年4月 | 公式許可取得に伴い第2条を改定 |
+| 2026年4月 | サイト内ページとして統合・特別ページとして管理開始 |`;
+
+  await set(ref(db, 'specialPages/novel'), {
+    title:'真夏の夜の谷澤', icon:'📖',
+    description:'世界初の谷澤小説 / ヤジュシコ世界遺産・国宝認定',
+    body: novelBody, createdAt:now, updatedAt:now
+  });
+  await set(ref(db, 'specialPages/terms'), {
+    title:'利用規約', icon:'⚖️',
+    description:'本サイトの利用規約',
+    body: termsBody, createdAt:now, updatedAt:now
+  });
+  const s2 = await get(ref(db, 'specialPages'));
+  allSpecialPages = s2.exists() ? s2.val() : {};
+}
+
+function renderSidebarSpecial() {
+  const ul = document.getElementById('sidebar-special');
+  if (!ul) return;
+  ul.innerHTML = Object.entries(allSpecialPages).map(([id,p]) =>
+    `<li><a onclick="showSpecialPage('${esc(id)}')">${p.icon||'📄'} ${escH(p.title)}</a></li>`
+  ).join('');
+  // メインページの特別ページセクションも更新
+  const mainList = document.getElementById('main-special-list');
+  if (mainList) {
+    mainList.innerHTML = Object.entries(allSpecialPages).map(([id,p]) =>
+      `<a onclick="showSpecialPage('${esc(id)}')" style="display:block;padding:10px 12px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text);text-decoration:none;cursor:pointer" onmouseover="this.style.background='var(--accent-light)'" onmouseout="this.style.background='var(--bg)'">
+        <div style="font-size:11px;color:var(--text-faint);margin-bottom:2px">${escH(p.description||'')}</div>
+        <div style="font-family:'Shippori Mincho B1',serif;font-size:1.05rem;font-weight:800">${escH(p.icon||'📄')} ${escH(p.title)}</div>
+      </a>`
+    ).join('');
+  }
+}
+
+window.showSpecialPage = function(id) {
+  const p = allSpecialPages[id];
+  if (!p) { showToast('ページが見つかりません'); return; }
+  currentArticleId = '__special__' + id;
+  document.getElementById('special-title-display').textContent = (p.icon||'') + ' ' + p.title;
+  document.getElementById('special-meta-display').innerHTML =
+    p.description ? `<span class="badge">${escH(p.description)}</span>` : '';
+  const ed = isAdmin
+    ? `<button class="btn btn-sm btn-primary" onclick="openEditSpecial('${esc(id)}')">✏️ 編集</button><button class="btn btn-sm btn-danger" onclick="deleteSpecialPage('${esc(id)}')">🗑 削除</button>`
+    : `<button class="btn btn-sm btn-primary" onclick="requireAdmin(()=>openEditSpecial('${esc(id)}'))">✏️ 編集</button><button class="btn btn-sm btn-danger" onclick="requireAdmin(()=>deleteSpecialPage('${esc(id)}'))">🗑 削除</button>`;
+  document.getElementById('special-actions-display').innerHTML =
+    `<button class="btn btn-sm" onclick="showMainPage()">← トップへ戻る</button>${ed}`;
+  document.getElementById('special-body-display').innerHTML = renderWiki(stripGradeLine(p.body||''));
+  showView('special');
+};
+
+window.openEditSpecial = function(id) {
+  const p = allSpecialPages[id];
+  if (!p) return;
+  editingId = '__special__' + id;
+  document.getElementById('editor-title-display').textContent = `「${p.title}」を編集`;
+  document.getElementById('editor-type').value = 'special';
+  onEditorTypeChange();
+  document.getElementById('editor-article-title').value = p.title;
+  document.getElementById('editor-icon').value = p.icon || '';
+  document.getElementById('editor-description').value = p.description || '';
+  document.getElementById('editor-body').value = p.body || '';
+  document.getElementById('editor-summary').value = '';
+  document.getElementById('editor-preview').style.display = 'none';
+  showView('editor');
+};
+
+window.deleteSpecialPage = function(id) {
+  const p = allSpecialPages[id];
+  if (!p) return;
+  if (!confirm(`「${p.title}」を削除しますか？`)) return;
+  remove(ref(db, `specialPages/${id}`)).then(() => {
+    delete allSpecialPages[id];
+    renderSidebarSpecial();
+    showToast(`「${p.title}」を削除しました`);
+    showMainPage();
+  }).catch(e => showToast('削除エラー: ' + e.message));
+};
 
 window.showArticle=function(id){
   const a=allArticles[id]; if(!a){showToast('記事が見つかりません');return;}
@@ -682,6 +837,12 @@ function renderWiki(text){
   s=s.replace(/\[\[([^\]]+?)\]\]/g,(_,t)=>{const i=findId(t);return i?`<a class="wiki-link" onclick="showArticle('${esc(i)}')">${escH(t)}</a>`:`<a class="wiki-redlink" onclick="openNewArticleWithTitle('${esc(t)}')">${escH(t)}</a>`;});
   s=parseTable(s);
   s=s.replace(/^&gt; (.+)$/gm,'<blockquote>$1</blockquote>');
+  // 区切り線: ---
+  s=s.replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--border);margin:1.5em 0">');
+  // 章タイトル: === ... ===
+  s=s.replace(/^=== (.+?) ===$/gm,'<h2 style="font-family:\'Shippori Mincho B1\',serif;font-size:1.3rem;font-weight:800;border-bottom:1px solid var(--border);padding-bottom:6px;margin:1.5em 0 .75em">$1</h2>');
+  // 小見出し: == ... ==
+  s=s.replace(/^== (.+?) ==$/gm,'<h3 style="font-family:\'Shippori Mincho B1\',serif;font-size:1.1rem;font-weight:700;margin:1.2em 0 .5em;color:var(--text-muted)">$1</h3>');
   s=s.replace(/\n/g,'<br>');
   if(fns.length){s+='<div class="footnotes-section"><h4>脚注</h4>';fns.forEach(f=>{s+=`<div><sup>${f.n}</sup> ${escH(f.text)}</div>`;});s+='</div>';}
   return s;
@@ -738,11 +899,20 @@ window.submitPw=function(){
 };
 
 let editingId=null;
+
+window.onEditorTypeChange = function(){
+  const t=document.getElementById('editor-type').value;
+  document.getElementById('editor-article-fields').style.display=t==='article'?'':'none';
+  document.getElementById('editor-special-fields').style.display=t==='special'?'':'none';
+};
+
 window.openNewArticle=()=>requireAdmin(_openNew);
 function _openNew(){
   editingId=null;
-  document.getElementById('editor-title-display').textContent='新規記事を作成';
-  ['editor-article-title','editor-body','editor-summary'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('editor-title-display').textContent='新規ページを作成';
+  ['editor-article-title','editor-body','editor-summary','editor-icon','editor-description'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('editor-type').value='article';
+  onEditorTypeChange();
   document.getElementById('editor-pos').value='';document.getElementById('editor-grade').value='';document.getElementById('editor-important').value='false';
   document.getElementById('editor-preview').style.display='none';showView('editor');
 }
@@ -751,11 +921,12 @@ window.openEditArticle=function(id){
   const a=allArticles[id];if(!a)return;
   editingId=id;
   document.getElementById('editor-title-display').textContent=`「${a.title}」を編集`;
+  document.getElementById('editor-type').value='article';
+  onEditorTypeChange();
   document.getElementById('editor-article-title').value=a.title;
   document.getElementById('editor-pos').value=a.pos||'';
   document.getElementById('editor-grade').value=a.grade||'';
   document.getElementById('editor-important').value=String(a.important||false);
-  // 編集画面でも「**級:** ○○」行を除去して表示（DB上のデータは変えない）
   document.getElementById('editor-body').value=stripGradeLine(a.body||'');
   document.getElementById('editor-summary').value='';
   document.getElementById('editor-preview').style.display='none';showView('editor');
@@ -766,20 +937,52 @@ window.previewArticle=function(){
 };
 window.saveArticle=function(){
   const title=document.getElementById('editor-article-title').value.trim();if(!title){showToast('タイトルを入力してください');return;}
-  const pos=document.getElementById('editor-pos').value;
-  const grade=document.getElementById('editor-grade').value;
-  const important=document.getElementById('editor-important').value==='true';
+  const type=document.getElementById('editor-type').value;
   const body=document.getElementById('editor-body').value;
   const summary=document.getElementById('editor-summary').value.trim();
-  const id=editingId||(title.replace(/[^\w\u3040-\u9FFF]/g,'_').substring(0,40)+'_'+Date.now().toString(36));
-  const now=Date.now();const ex=allArticles[id];
-  if(ex) push(ref(db,`history/${id}`),{title:ex.title,pos:ex.pos,grade:ex.grade,important:ex.important,body:ex.body,savedAt:now,summary:summary||'編集'});
-  const art={title,pos,grade,important,body,createdAt:ex?.createdAt||now,updatedAt:now};
-  set(ref(db,`articles/${id}`),art).then(()=>{
-    allArticles[id]=art;updateStats();renderSidebarImportant();renderMainGrades();showToast('保存しました');showArticle(id);
-  }).catch(e=>showToast('保存エラー: '+e.message));
+  const now=Date.now();
+
+  if(type==='special'){
+    // 特別ページとして保存
+    const icon=document.getElementById('editor-icon').value.trim();
+    const description=document.getElementById('editor-description').value.trim();
+    // editingIdが '__special__xxx' の形式なら既存編集
+    const rawId = editingId && editingId.startsWith('__special__')
+      ? editingId.replace('__special__','')
+      : (title.replace(/[^\w\u3040-\u9FFF]/g,'_').substring(0,40)+'_'+Date.now().toString(36));
+    const ex=allSpecialPages[rawId];
+    const page={title,icon,description,body,createdAt:ex?.createdAt||now,updatedAt:now};
+    set(ref(db,`specialPages/${rawId}`),page).then(()=>{
+      allSpecialPages[rawId]=page;
+      renderSidebarSpecial();
+      showToast('特別ページを保存しました');
+      showSpecialPage(rawId);
+    }).catch(e=>showToast('保存エラー: '+e.message));
+  } else {
+    // 通常記事として保存
+    const pos=document.getElementById('editor-pos').value;
+    const grade=document.getElementById('editor-grade').value;
+    const important=document.getElementById('editor-important').value==='true';
+    const id=editingId&&!editingId.startsWith('__special__')
+      ? editingId
+      : (title.replace(/[^\w\u3040-\u9FFF]/g,'_').substring(0,40)+'_'+Date.now().toString(36));
+    const ex=allArticles[id];
+    if(ex) push(ref(db,`history/${id}`),{title:ex.title,pos:ex.pos,grade:ex.grade,important:ex.important,body:ex.body,savedAt:now,summary:summary||'編集'});
+    const art={title,pos,grade,important,body,createdAt:ex?.createdAt||now,updatedAt:now};
+    set(ref(db,`articles/${id}`),art).then(()=>{
+      allArticles[id]=art;updateStats();renderSidebarImportant();renderMainGrades();showToast('保存しました');showArticle(id);
+    }).catch(e=>showToast('保存エラー: '+e.message));
+  }
 };
-window.cancelEdit=()=>currentArticleId?showArticle(currentArticleId):showMainPage();
+window.cancelEdit=()=>{
+  if(currentArticleId&&currentArticleId.startsWith('__special__')){
+    showSpecialPage(currentArticleId.replace('__special__',''));
+  } else if(currentArticleId){
+    showArticle(currentArticleId);
+  } else {
+    showMainPage();
+  }
+};
 
 window.deleteArticle=function(id){
   const a=allArticles[id];if(!a)return;
