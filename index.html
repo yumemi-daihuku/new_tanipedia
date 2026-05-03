@@ -848,6 +848,11 @@ function renderWiki(text){
   // 小見出し: == ... ==
   s=s.replace(/^== (.+?) ==$/gm,'<h3 style="font-family:\'Shippori Mincho B1\',serif;font-size:1.1rem;font-weight:700;margin:1.2em 0 .5em;color:var(--text-muted)">$1</h3>');
   s=s.replace(/\n/g,'<br>');
+  // hr・見出し前後の余分な<br>を除去
+  s=s.replace(/(<br>)+(<hr[^>]*>)/g,'$2');
+  s=s.replace(/(<hr[^>]*>)(<br>)+/g,'$1');
+  s=s.replace(/(<br>)+(<h[23][^>]*>)/g,'$2');
+  s=s.replace(/(<\/h[23]>)(<br>)+/g,'$1');
   if(fns.length){s+='<div class="footnotes-section"><h4>脚注</h4>';fns.forEach(f=>{s+=`<div><sup>${f.n}</sup> ${escH(f.text)}</div>`;});s+='</div>';}
   return s;
 }
