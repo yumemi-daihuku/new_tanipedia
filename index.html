@@ -935,9 +935,9 @@ window.submitPw=function(){
     showToast('管理者として認証しました');
     if(pendingAdminAction){pendingAdminAction();pendingAdminAction=null;}
   } else if(val===SECRET_PW){
-    // 隠しページ閲覧モード（管理者権限も付与して編集可能に）
-    isAdmin=true; isSecret=true;
-    document.getElementById('admin-btn').textContent='🔓 管理中';
+    // 隠しページ閲覧モード（isAdminはfalseのまま。管理者権限なし）
+    isAdmin=false; isSecret=true;
+    document.getElementById('admin-btn').textContent='🔒 管理';
     document.getElementById('pw-modal').classList.remove('open');
     // 隠しページオプションをセレクトに表示
     const opt=document.getElementById('option-hidden');
@@ -991,7 +991,7 @@ function showHiddenIndex() {
 }
 
 window.showHiddenPage = function(id) {
-  if (!isSecret && !isAdmin) return; // 認証なしでは絶対に表示しない
+  if (!isSecret) return; // isSecretなしでは絶対に表示しない
   const p = allHiddenPages[id];
   if (!p) { showToast('ページが見つかりません'); return; }
   currentArticleId = '__hidden__' + id;
