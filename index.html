@@ -269,6 +269,16 @@
       </div>
       <div class="article-body" id="special-body-display"></div>
     </div>
+
+    <!-- 隠しページビュー（tanizawazuihitu認証時のみ表示） -->
+    <div id="view-hidden" class="page-view">
+      <div class="article-header">
+        <div class="article-title" id="hidden-title-display"></div>
+        <div class="article-meta" id="hidden-meta-display"></div>
+        <div class="article-actions" id="hidden-actions-display"></div>
+      </div>
+      <div class="article-body" id="hidden-body-display"></div>
+    </div>
         </div>
   </main>
 </div>
@@ -303,10 +313,14 @@ const app = initializeApp({
 const db = getDatabase(app);
 
 let allArticles = {};
+let allSpecialPages = {};
+let allHiddenPages = {};   // 隠しページ（tanizawazuihitu認証時のみ使用）
 let isAdmin = false;
+let isSecret = false;      // 隠しページ閲覧モード
 let currentArticleId = null;
 let pendingAdminAction = null;
 const ADMIN_PW = "tani2026";
+const SECRET_PW = "tanizawazuihitu";
 
 // ================================================================
 // 「**級:** 〇〇」で始まる行を表示・編集時だけ除去する（DB不変）
@@ -427,8 +441,6 @@ window.showView=n=>{document.querySelectorAll('.page-view').forEach(el=>el.class
 window.showMainPage=()=>{renderMainGrades();showView('main');};
 
 // ===== 特別ページ管理 =====
-let allSpecialPages = {}; // { id: { title, icon, description, body, createdAt, updatedAt } }
-
 // 特別ページをFirebaseからロード（初回SEEDも含む）
 async function loadSpecialPages() {
   const snap = await get(ref(db, 'specialPages'));
@@ -896,15 +908,174 @@ window.doSearch=function(){
 };
 
 window.toggleAdmin=function(){
-  if(isAdmin){isAdmin=false;document.getElementById('admin-btn').textContent='🔒 管理';showToast('管理者モードを終了しました');if(currentArticleId)showArticle(currentArticleId);}
-  else openPwModal(()=>{});
+  if(isAdmin||isSecret){
+    isAdmin=false; isSecret=false;
+    document.getElementById('admin-btn').textContent='🔒 管理';
+    showToast('ログアウトしました');
+    showMainPage();
+  } else openPwModal(()=>{});
 };
 window.requireAdmin=cb=>isAdmin?cb():openPwModal(cb);
 function openPwModal(cb){pendingAdminAction=cb;document.getElementById('pw-input').value='';document.getElementById('pw-error').style.display='none';document.getElementById('pw-modal').classList.add('open');setTimeout(()=>document.getElementById('pw-input').focus(),100);}
 window.closePwModal=()=>{document.getElementById('pw-modal').classList.remove('open');pendingAdminAction=null;};
 window.submitPw=function(){
-  if(document.getElementById('pw-input').value===ADMIN_PW){isAdmin=true;document.getElementById('admin-btn').textContent='🔓 管理中';document.getElementById('pw-modal').classList.remove('open');showToast('管理者として認証しました');if(pendingAdminAction){pendingAdminAction();pendingAdminAction=null;}}
-  else document.getElementById('pw-error').style.display='block';
+  const val=document.getElementById('pw-input').value;
+  if(val===ADMIN_PW){
+    // 通常管理者
+    isAdmin=true; isSecret=false;
+    document.getElementById('admin-btn').textContent='🔓 管理中';
+    document.getElementById('pw-modal').classList.remove('open');
+    showToast('管理者として認証しました');
+    if(pendingAdminAction){pendingAdminAction();pendingAdminAction=null;}
+  } else if(val===SECRET_PW){
+    // 隠しページ閲覧モード（管理者権限も付与して編集可能に）
+    isAdmin=true; isSecret=true;
+    document.getElementById('admin-btn').textContent='🔓 管理中';
+    document.getElementById('pw-modal').classList.remove('open');
+    pendingAdminAction=null;
+    loadAndShowHiddenIndex();
+  } else {
+    document.getElementById('pw-error').style.display='block';
+  }
+};
+
+// ===== 隠しページ管理 =====
+// hiddenPages/ に保存。サイドバー・一覧・検索には絶対に出ない。
+
+async function loadAndShowHiddenIndex() {
+  try {
+    const snap = await get(ref(db, 'hiddenPages'));
+    allHiddenPages = snap.exists() ? snap.val() : {};
+  } catch(e) { allHiddenPages = {}; }
+
+  // ページが1つもなければ新規作成画面へ
+  const keys = Object.keys(allHiddenPages);
+  if (keys.length === 0) {
+    _openHiddenNew();
+  } else if (keys.length === 1) {
+    showHiddenPage(keys[0]);
+  } else {
+    // 複数ある場合は一覧を表示
+    showHiddenIndex();
+  }
+}
+
+function showHiddenIndex() {
+  document.getElementById('hidden-title-display').textContent = '隠しページ一覧';
+  document.getElementById('hidden-meta-display').innerHTML = '';
+  document.getElementById('hidden-actions-display').innerHTML =
+    `<button class="btn btn-sm btn-primary" onclick="_openHiddenNew()">＋ 新規作成</button>
+     <button class="btn btn-sm" onclick="showMainPage()">← トップへ戻る</button>`;
+  const keys = Object.keys(allHiddenPages);
+  document.getElementById('hidden-body-display').innerHTML =
+    `<div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">`
+    + keys.map(id => {
+        const p = allHiddenPages[id];
+        return `<div onclick="showHiddenPage('${esc(id)}')" style="padding:12px;border:1px solid var(--border);border-radius:4px;background:var(--bg);cursor:pointer" onmouseover="this.style.background='var(--accent-light)'" onmouseout="this.style.background='var(--bg)'">
+          <div style="font-family:'Shippori Mincho B1',serif;font-size:1.05rem;font-weight:800">${escH(p.title)}</div>
+          <div style="font-size:12px;color:var(--text-faint);font-family:'Noto Sans JP',sans-serif;margin-top:2px">更新: ${new Date(p.updatedAt||0).toLocaleString('ja-JP')}</div>
+        </div>`;
+      }).join('')
+    + `</div>`;
+  showView('hidden');
+}
+
+window.showHiddenPage = function(id) {
+  if (!isSecret && !isAdmin) return; // 認証なしでは絶対に表示しない
+  const p = allHiddenPages[id];
+  if (!p) { showToast('ページが見つかりません'); return; }
+  currentArticleId = '__hidden__' + id;
+  document.getElementById('hidden-title-display').textContent = p.title;
+  document.getElementById('hidden-meta-display').innerHTML =
+    p.updatedAt ? `<span style="font-size:12px;color:var(--text-faint);font-family:'Noto Sans JP',sans-serif">更新: ${new Date(p.updatedAt).toLocaleString('ja-JP')}</span>` : '';
+  document.getElementById('hidden-actions-display').innerHTML =
+    `<button class="btn btn-sm" onclick="showHiddenIndex()">← 一覧へ</button>
+     <button class="btn btn-sm btn-primary" onclick="openEditHidden('${esc(id)}')">✏️ 編集</button>
+     <button class="btn btn-sm btn-danger" onclick="deleteHiddenPage('${esc(id)}')">🗑 削除</button>
+     <button class="btn btn-sm" onclick="showHiddenHistory('${esc(id)}')">📋 変更履歴</button>`;
+  document.getElementById('hidden-body-display').innerHTML = renderWiki(p.body||'');
+  showView('hidden');
+};
+
+window._openHiddenNew = function() {
+  editingId = '__hidden__new';
+  document.getElementById('editor-title-display').textContent = '隠しページを新規作成';
+  ['editor-article-title','editor-body','editor-summary','editor-icon','editor-description'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('editor-type').value = 'hidden';
+  document.getElementById('editor-article-fields').style.display = 'none';
+  document.getElementById('editor-special-fields').style.display = 'none';
+  document.getElementById('editor-preview').style.display = 'none';
+  showView('editor');
+};
+
+window.openEditHidden = function(id) {
+  const p = allHiddenPages[id];
+  if (!p) return;
+  editingId = '__hidden__' + id;
+  document.getElementById('editor-title-display').textContent = `「${p.title}」を編集`;
+  document.getElementById('editor-type').value = 'hidden';
+  document.getElementById('editor-article-fields').style.display = 'none';
+  document.getElementById('editor-special-fields').style.display = 'none';
+  document.getElementById('editor-article-title').value = p.title;
+  document.getElementById('editor-body').value = p.body || '';
+  document.getElementById('editor-summary').value = '';
+  document.getElementById('editor-preview').style.display = 'none';
+  showView('editor');
+};
+
+window.deleteHiddenPage = function(id) {
+  const p = allHiddenPages[id];
+  if (!p || !isSecret) return;
+  if (!confirm(`「${p.title}」を削除しますか？`)) return;
+  const now = Date.now();
+  push(ref(db,`hiddenHistory/${id}`),{...p,savedAt:now,summary:'削除前バックアップ'});
+  remove(ref(db,`hiddenPages/${id}`)).then(()=>{
+    delete allHiddenPages[id];
+    showToast(`削除しました`);
+    showHiddenIndex();
+  }).catch(e=>showToast('削除エラー: '+e.message));
+};
+
+window.showHiddenHistory = function(id) {
+  if (!isSecret) return;
+  get(ref(db,`hiddenHistory/${id}`)).then(snap=>{
+    document.getElementById('hidden-title-display').textContent = '変更履歴';
+    document.getElementById('hidden-meta-display').innerHTML = '';
+    document.getElementById('hidden-actions-display').innerHTML =
+      `<button class="btn btn-sm" onclick="showHiddenPage('${esc(id)}')">← 戻る</button>`;
+    const el = document.getElementById('hidden-body-display');
+    if (!snap.exists()) {
+      el.innerHTML = '<p style="font-family:sans-serif;font-size:14px;color:var(--text-faint)">変更履歴がありません</p>';
+    } else {
+      el.innerHTML = `<div class="history-list">`
+        + Object.entries(snap.val()).sort((a,b)=>b[0]-a[0]).map(([k,h])=>`
+          <div class="history-item">
+            <div class="history-time">${new Date(h.savedAt||parseInt(k)).toLocaleString('ja-JP')}</div>
+            <div class="history-summary"><strong>${escH(h.title||'')}</strong>${h.summary?` <span style="color:var(--text-muted)">— ${escH(h.summary)}</span>`:''}</div>
+            <div class="history-actions"><button class="btn btn-sm btn-primary" onclick="rollbackHidden('${esc(id)}','${esc(k)}')">↩ 戻す</button></div>
+          </div>`).join('')
+        + `</div>`;
+    }
+    showView('hidden');
+  });
+};
+
+window.rollbackHidden = function(id, key) {
+  if (!isSecret) return;
+  get(ref(db,`hiddenHistory/${id}/${key}`)).then(snap=>{
+    if (!snap.exists()) { showToast('履歴が見つかりません'); return; }
+    const h = snap.val();
+    if (!confirm(`この内容にロールバックしますか？`)) return;
+    const now = Date.now();
+    const ex = allHiddenPages[id];
+    if (ex) push(ref(db,`hiddenHistory/${id}`),{...ex,savedAt:now,summary:'ロールバック前バックアップ'});
+    const p = {title:h.title,body:h.body||'',createdAt:ex?.createdAt||now,updatedAt:now};
+    set(ref(db,`hiddenPages/${id}`),p).then(()=>{
+      allHiddenPages[id]=p;
+      showToast('ロールバックしました');
+      showHiddenPage(id);
+    });
+  });
 };
 
 let editingId=null;
@@ -951,7 +1122,21 @@ window.saveArticle=function(){
   const summary=document.getElementById('editor-summary').value.trim();
   const now=Date.now();
 
-  if(type==='special'){
+  if(type==='hidden'){
+    // 隠しページとして保存（hiddenPages/に格納、一覧・検索・サイドバーには出ない）
+    if(!isSecret){showToast('権限がありません');return;}
+    const rawId = editingId && editingId.startsWith('__hidden__') && editingId!=='__hidden__new'
+      ? editingId.replace('__hidden__','')
+      : (title.replace(/[^\w\u3040-\u9FFF]/g,'_').substring(0,40)+'_'+Date.now().toString(36));
+    const ex = allHiddenPages[rawId];
+    if(ex) push(ref(db,`hiddenHistory/${rawId}`),{title:ex.title,body:ex.body,savedAt:now,summary:summary||'編集'});
+    const p = {title,body,createdAt:ex?.createdAt||now,updatedAt:now};
+    set(ref(db,`hiddenPages/${rawId}`),p).then(()=>{
+      allHiddenPages[rawId]=p;
+      showToast('保存しました');
+      showHiddenPage(rawId);
+    }).catch(e=>showToast('保存エラー: '+e.message));
+  } else if(type==='special'){
     // 特別ページとして保存
     const icon=document.getElementById('editor-icon').value.trim();
     const description=document.getElementById('editor-description').value.trim();
@@ -972,7 +1157,7 @@ window.saveArticle=function(){
     const pos=document.getElementById('editor-pos').value;
     const grade=document.getElementById('editor-grade').value;
     const important=document.getElementById('editor-important').value==='true';
-    const id=editingId&&!editingId.startsWith('__special__')
+    const id=editingId&&!editingId.startsWith('__special__')&&!editingId.startsWith('__hidden__')
       ? editingId
       : (title.replace(/[^\w\u3040-\u9FFF]/g,'_').substring(0,40)+'_'+Date.now().toString(36));
     const ex=allArticles[id];
@@ -984,7 +1169,10 @@ window.saveArticle=function(){
   }
 };
 window.cancelEdit=()=>{
-  if(currentArticleId&&currentArticleId.startsWith('__special__')){
+  if(currentArticleId&&currentArticleId.startsWith('__hidden__')){
+    const hid=currentArticleId.replace('__hidden__','');
+    if(allHiddenPages[hid]) showHiddenPage(hid); else showHiddenIndex();
+  } else if(currentArticleId&&currentArticleId.startsWith('__special__')){
     showSpecialPage(currentArticleId.replace('__special__',''));
   } else if(currentArticleId){
     showArticle(currentArticleId);
