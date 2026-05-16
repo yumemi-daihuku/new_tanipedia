@@ -227,6 +227,7 @@
           <select id="editor-type" onchange="onEditorTypeChange()">
             <option value="article">📄 記事（語録）</option>
             <option value="special">🌟 特別ページ</option>
+            <option value="hidden" id="option-hidden" style="display:none">🔒 隠しページ</option>
           </select>
         </div>
         <div class="form-group"><label>タイトル *</label><input type="text" id="editor-article-title" placeholder="例：谷ギレ / 真夏の夜の谷澤"></div>
@@ -911,6 +912,12 @@ window.toggleAdmin=function(){
   if(isAdmin||isSecret){
     isAdmin=false; isSecret=false;
     document.getElementById('admin-btn').textContent='🔒 管理';
+    // 隠しページオプションを非表示に戻す
+    const opt=document.getElementById('option-hidden');
+    if(opt){ opt.style.display='none'; }
+    // もし隠しページオプションが選択中なら記事に戻す
+    const sel=document.getElementById('editor-type');
+    if(sel && sel.value==='hidden'){ sel.value='article'; onEditorTypeChange(); }
     showToast('ログアウトしました');
     showMainPage();
   } else openPwModal(()=>{});
@@ -932,6 +939,9 @@ window.submitPw=function(){
     isAdmin=true; isSecret=true;
     document.getElementById('admin-btn').textContent='🔓 管理中';
     document.getElementById('pw-modal').classList.remove('open');
+    // 隠しページオプションをセレクトに表示
+    const opt=document.getElementById('option-hidden');
+    if(opt) opt.style.display='';
     pendingAdminAction=null;
     loadAndShowHiddenIndex();
   } else {
@@ -1002,8 +1012,7 @@ window._openHiddenNew = function() {
   document.getElementById('editor-title-display').textContent = '隠しページを新規作成';
   ['editor-article-title','editor-body','editor-summary','editor-icon','editor-description'].forEach(i=>document.getElementById(i).value='');
   document.getElementById('editor-type').value = 'hidden';
-  document.getElementById('editor-article-fields').style.display = 'none';
-  document.getElementById('editor-special-fields').style.display = 'none';
+  onEditorTypeChange();
   document.getElementById('editor-preview').style.display = 'none';
   showView('editor');
 };
@@ -1014,8 +1023,7 @@ window.openEditHidden = function(id) {
   editingId = '__hidden__' + id;
   document.getElementById('editor-title-display').textContent = `「${p.title}」を編集`;
   document.getElementById('editor-type').value = 'hidden';
-  document.getElementById('editor-article-fields').style.display = 'none';
-  document.getElementById('editor-special-fields').style.display = 'none';
+  onEditorTypeChange();
   document.getElementById('editor-article-title').value = p.title;
   document.getElementById('editor-body').value = p.body || '';
   document.getElementById('editor-summary').value = '';
@@ -1084,6 +1092,7 @@ window.onEditorTypeChange = function(){
   const t=document.getElementById('editor-type').value;
   document.getElementById('editor-article-fields').style.display=t==='article'?'':'none';
   document.getElementById('editor-special-fields').style.display=t==='special'?'':'none';
+  // hiddenは専用フィールドなし（タイトルと本文のみ）
 };
 
 window.openNewArticle=()=>requireAdmin(_openNew);
