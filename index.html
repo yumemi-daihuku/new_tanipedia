@@ -974,7 +974,7 @@ function showHiddenIndex() {
   document.getElementById('hidden-title-display').textContent = '隠しページ一覧';
   document.getElementById('hidden-meta-display').innerHTML = '';
   document.getElementById('hidden-actions-display').innerHTML =
-    `<button class="btn btn-sm btn-primary" onclick="_openHiddenNew()">＋ 新規作成</button>
+    `${isAdmin ? `<button class="btn btn-sm btn-primary" onclick="_openHiddenNew()">＋ 新規作成</button>` : ''}
      <button class="btn btn-sm" onclick="showMainPage()">← トップへ戻る</button>`;
   const keys = Object.keys(allHiddenPages);
   document.getElementById('hidden-body-display').innerHTML =
@@ -1000,14 +1000,14 @@ window.showHiddenPage = function(id) {
     p.updatedAt ? `<span style="font-size:12px;color:var(--text-faint);font-family:'Noto Sans JP',sans-serif">更新: ${new Date(p.updatedAt).toLocaleString('ja-JP')}</span>` : '';
   document.getElementById('hidden-actions-display').innerHTML =
     `<button class="btn btn-sm" onclick="showHiddenIndex()">← 一覧へ</button>
-     <button class="btn btn-sm btn-primary" onclick="openEditHidden('${esc(id)}')">✏️ 編集</button>
-     <button class="btn btn-sm btn-danger" onclick="deleteHiddenPage('${esc(id)}')">🗑 削除</button>
+     ${isAdmin ? `<button class="btn btn-sm btn-primary" onclick="openEditHidden('${esc(id)}')">✏️ 編集</button><button class="btn btn-sm btn-danger" onclick="deleteHiddenPage('${esc(id)}')">🗑 削除</button>` : ''}
      <button class="btn btn-sm" onclick="showHiddenHistory('${esc(id)}')">📋 変更履歴</button>`;
   document.getElementById('hidden-body-display').innerHTML = renderWiki(p.body||'');
   showView('hidden');
 };
 
 window._openHiddenNew = function() {
+  if (!isAdmin) { showToast('編集にはtani2026での認証が必要です'); return; }
   editingId = '__hidden__new';
   document.getElementById('editor-title-display').textContent = '隠しページを新規作成';
   ['editor-article-title','editor-body','editor-summary','editor-icon','editor-description'].forEach(i=>document.getElementById(i).value='');
@@ -1018,6 +1018,7 @@ window._openHiddenNew = function() {
 };
 
 window.openEditHidden = function(id) {
+  if (!isAdmin) { showToast('編集にはtani2026での認証が必要です'); return; }
   const p = allHiddenPages[id];
   if (!p) return;
   editingId = '__hidden__' + id;
@@ -1033,7 +1034,7 @@ window.openEditHidden = function(id) {
 
 window.deleteHiddenPage = function(id) {
   const p = allHiddenPages[id];
-  if (!p || !isSecret) return;
+  if (!p || !isAdmin) return;
   if (!confirm(`「${p.title}」を削除しますか？`)) return;
   const now = Date.now();
   push(ref(db,`hiddenHistory/${id}`),{...p,savedAt:now,summary:'削除前バックアップ'});
@@ -1060,7 +1061,7 @@ window.showHiddenHistory = function(id) {
           <div class="history-item">
             <div class="history-time">${new Date(h.savedAt||parseInt(k)).toLocaleString('ja-JP')}</div>
             <div class="history-summary"><strong>${escH(h.title||'')}</strong>${h.summary?` <span style="color:var(--text-muted)">— ${escH(h.summary)}</span>`:''}</div>
-            <div class="history-actions"><button class="btn btn-sm btn-primary" onclick="rollbackHidden('${esc(id)}','${esc(k)}')">↩ 戻す</button></div>
+            <div class="history-actions">${isAdmin ? `<button class="btn btn-sm btn-primary" onclick="rollbackHidden('${esc(id)}','${esc(k)}')">↩ 戻す</button>` : ''}</div>
           </div>`).join('')
         + `</div>`;
     }
@@ -1069,7 +1070,7 @@ window.showHiddenHistory = function(id) {
 };
 
 window.rollbackHidden = function(id, key) {
-  if (!isSecret) return;
+  if (!isSecret || !isAdmin) return;
   get(ref(db,`hiddenHistory/${id}/${key}`)).then(snap=>{
     if (!snap.exists()) { showToast('履歴が見つかりません'); return; }
     const h = snap.val();
@@ -1133,7 +1134,7 @@ window.saveArticle=function(){
 
   if(type==='hidden'){
     // 隠しページとして保存（hiddenPages/に格納、一覧・検索・サイドバーには出ない）
-    if(!isSecret){showToast('権限がありません');return;}
+    if(!isAdmin){showToast('権限がありません');return;}
     const rawId = editingId && editingId.startsWith('__hidden__') && editingId!=='__hidden__new'
       ? editingId.replace('__hidden__','')
       : (title.replace(/[^\w\u3040-\u9FFF]/g,'_').substring(0,40)+'_'+Date.now().toString(36));
